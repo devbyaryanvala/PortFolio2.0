@@ -1,0 +1,225 @@
+/* Proto/css/crt-theme.css */
+/* CRT Theme Specifics */
+
+body.crt-theme {
+    --primary-text-color: #b0c4de; /* Lighter muted blue for text */
+    --primary-bg-color: #08081a; /* Slightly darker, less saturated blue */
+    --header-bg-color: rgba(5, 5, 20, 0.75);
+    --header-border-color: var(--neon-green); /* #39ff14 */
+    --nav-link-color: var(--neon-green);
+    --nav-link-hover-color: #fff;
+    --nav-link-active-border-color: #fff;
+    --terminal-bg-color: rgba(0, 0, 0, 0.75);
+    --terminal-border-color: var(--neon-green);
+    --terminal-shadow-color: #1a8d0c; /* Darker green for shadow */
+    --terminal-header-bg: #1c1c1c;
+    --terminal-header-text: var(--neon-green);
+    --terminal-content-color: var(--neon-green);
+    --button-primary-bg: #444;
+    --button-primary-text: var(--neon-green);
+    --button-primary-border: #666;
+    --hyperlink-color: #6795ff; /* Brighter blue for links */
+    --hyperlink-border-color: #6795ff;
+    --hyperlink-hover-bg: #6795ff;
+    --hyperlink-hover-text: #08081a;
+    --selection-bg: var(--neon-green);
+    --selection-text: #08081a;
+
+    /* CRT specific effects */
+    animation: crtBodyFlicker 0.07s infinite alternate; /* Slightly slower flicker */
+}
+
+@keyframes crtBodyFlicker {
+    0% { opacity: 0.97; }
+    100% { opacity: 1; }
+}
+
+.crt-theme .overlay-scanlines {
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.25) 3px, /* Slightly softer scanlines */
+        rgba(0, 0, 0, 0.35) 4px
+    );
+    opacity: 0.4; /* More subtle */
+    z-index: 9998; /* Below vignette */
+    animation: rollScanlines 45s linear infinite; /* Slower rolling scanlines */
+}
+
+@keyframes rollScanlines {
+    from { background-position-y: 0; }
+    to   { background-position-y: 150px; } /* Adjust distance for speed */
+}
+
+.crt-theme .overlay-vignette {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 115%); /* Smoother gradient */
+    opacity: 0.85;
+    z-index: 9999;
+}
+
+/* Text glow for specific elements in CRT theme */
+.crt-theme h2,
+.crt-theme .nav-link,
+.crt-theme .window-title,
+.crt-theme .submit-button,
+.crt-theme .neon-blue,
+.crt-theme .neon-green,
+.crt-theme #welcome-text,
+.crt-theme .blinking-cursor,
+.crt-theme .skills-container.dos-output .skill-name,
+.crt-theme .skills-container.dos-output p, /* Apply to DOS output paragraphs too */
+.crt-theme .progress-fill,
+.crt-theme .old-hyperlink,
+.crt-theme #visitor-count,
+.crt-theme footer .retro-copyright {
+    text-shadow: 0 0 2px currentColor, 0 0 4px currentColor, 0 0 7px rgba(255, 255, 255, 0.25); /* Refined glow */
+    animation: crtTextFlicker 0.12s infinite alternate ease-in-out;
+}
+/* Reduce flicker on less important text or make it subtler */
+.crt-theme .bio p, .crt-theme .project-item p.tooltip {
+    text-shadow: 0 0 2px rgba(180, 200, 222, 0.5); /* Subtler glow for body text if desired */
+    animation: none; /* Or a much subtler flicker */
+}
+
+
+@keyframes crtTextFlicker {
+    0% { opacity: 0.94; filter: blur(0.1px); }
+    100% { opacity: 1; filter: blur(0px); }
+}
+
+.crt-theme .main-header {
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.4); /* Softened shadow */
+}
+
+.crt-theme .terminal-window {
+    /* CRT-specific visual styles like box-shadow remain */
+    box-shadow: 3px 3px 0px var(--terminal-shadow-color), 0 0 15px rgba(57, 255, 20, 0.25) inset;
+
+    /*
+      MODIFIED: Combine animations.
+      fadeInWindow (defined in style.css) handles initial opacity/transform.
+      crtTerminalGlowPulse (defined below) handles the CRT border/shadow pulse.
+      The 'animation' property on '.terminal-window' in style.css is effectively overridden by this more specific rule.
+    */
+    animation: fadeInWindow 0.5s ease-out forwards,
+                 crtTerminalGlowPulse 7s 0.5s infinite alternate ease-in-out; /* Delay glow pulse to start after fade-in */
+}
+
+@keyframes crtTerminalGlowPulse {
+    from {
+        border-color: var(--neon-green);
+        box-shadow: 3px 3px 0px var(--terminal-shadow-color), 0 0 15px rgba(57, 255, 20, 0.25) inset, 0 0 12px rgba(57, 255, 20, 0.15);
+    }
+    to {
+        border-color: #4eff28; /* Slightly brighter border on pulse */
+        box-shadow: 3px 3px 0px #2cb71c, 0 0 25px rgba(57, 255, 20, 0.35) inset, 0 0 20px rgba(57, 255, 20, 0.25); /* Enhanced glow on pulse */
+    }
+}
+/* Note: @keyframes fadeInWindow is defined in style.css and remains unchanged:
+@keyframes fadeInWindow {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+*/
+
+
+.crt-theme .contact-icons img:hover {
+    border-color: var(--neon-green);
+    filter: drop-shadow(0 0 8px var(--neon-green)); /* Enhanced glow */
+}
+
+.crt-theme .project-item {
+    background-color: rgba(10, 20, 40, 0.85);
+    border: 2px solid var(--neon-blue); /* Cyan border for projects */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.crt-theme .project-item:hover,
+.crt-theme .project-item:focus-within {
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.45);
+    border-color: #3cfcfc; /* Brighter cyan on hover */
+    transform: translateY(-5px) scale(1.02); /* Add slight scale */
+}
+.crt-theme .project-item h3 {
+    color: var(--neon-blue); /* Ensure project titles are cyan */
+}
+
+
+.crt-theme .skills-container.dos-output {
+    box-shadow: 0 0 12px var(--neon-green) inset, 0 0 8px var(--neon-green);
+}
+.crt-theme .progress-bar-old {
+    border: 1px solid var(--neon-green);
+}
+.crt-theme .progress-fill {
+    background-color: var(--neon-green);
+    color: #08081a; /* Dark background of CRT for text on progress bar */
+}
+
+
+.crt-theme .old-hyperlink, .crt-theme .download-button {
+    color: var(--hyperlink-color);
+    border-color: var(--hyperlink-color);
+    text-shadow: 0 0 3px var(--hyperlink-color);
+}
+.crt-theme .old-hyperlink:hover, .crt-theme .download-button:hover {
+    background-color: var(--hyperlink-hover-bg);
+    color: var(--hyperlink-hover-text); /* Use theme bg for contrast */
+    text-shadow: none; /* Remove text shadow when background changes */
+    border-style: solid;
+}
+
+.crt-theme #contact-form input[type="text"],
+.crt-theme #contact-form input[type="email"],
+.crt-theme #contact-form textarea {
+    background-color: #1a1a2a; /* Darker input fields for CRT */
+    border: 1px solid #4a4a6a;
+    color: var(--neon-green); /* Green text in forms */
+}
+.crt-theme #contact-form input[type="text"]:focus,
+.crt-theme #contact-form input[type="email"]:focus,
+.crt-theme #contact-form textarea:focus {
+    border-color: var(--neon-blue); /* Cyan focus */
+    box-shadow: 0 0 8px var(--neon-blue);
+    background-color: #202030;
+}
+.crt-theme #contact-form label {
+    color: #a0b0c0; /* Lighter label color */
+    text-shadow: 0 0 2px #a0b0c0;
+}
+
+.crt-theme .submit-button {
+    background-color: #333;
+    color: var(--neon-green);
+    border: 2px outset #555;
+    text-shadow: 0 0 3px var(--neon-green), 0 0 6px var(--neon-green);
+}
+.crt-theme .submit-button:hover {
+    background-color: #444;
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+}
+.crt-theme .submit-button:active {
+    background-color: #222;
+    border-style: inset;
+}
+
+/* Specific CRT theme icon tint */
+.crt-theme .controls-switcher .theme-icon {
+    filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(80deg) brightness(1.2); /* Adjusted green tint */
+}
+.crt-theme .controls-switcher button:hover .theme-icon {
+    filter: brightness(1.2) contrast(1.1); /* Make icon pop on hover */
+}
+
+
+/* Ensure selection style uses CRT theme variables */
+.crt-theme ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
+}
+.crt-theme ::-moz-selection { /* Firefox */
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
+}

@@ -1,0 +1,224 @@
+<HTML lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal portfolio of [Your Name], a Computer Engineering student showcasing projects, skills, and resume.">
+    <title>Aryan Vala - Computer Engineer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/crt-theme.css" id="theme-link">
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+<body class="crt-theme">
+    <div class="overlay-scanlines"></div>
+    <div class="overlay-vignette"></div>
+
+    <div id="dial-up-overlay" aria-hidden="true">
+        <div id="dial-up-content">
+            <p class="connecting-text-animation">CONNECTING...</p>
+            <div class="progress-bar-dialup" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="dial-up-status">
+                <div class="progress-bar-fill-dialup"></div>
+            </div>
+            <p id="dial-up-status">Initializing Modem... Dialing 555-1995...</p>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="logo-container">
+             <a href="#welcome" class="nav-link-logo">[ARYAN_VALA]</a>
+        </div>
+        <nav aria-label="Main navigation">
+            <ul class="nav-links">
+                <li><a href="#welcome" class="nav-link active" aria-label="Home section">HOME</a></li>
+                <li><a href="#about" class="nav-link" aria-label="About Me section">ABOUT</a></li>
+                <li><a href="#projects" class="nav-link" aria-label="Projects section">PROJECTS</a></li>
+                <li><a href="#skills" class="nav-link" aria-label="Skills section">SKILLS</a></li>
+                <li><a href="#resume" class="nav-link" aria-label="Resume section">RESUME</a></li>
+                <li><a href="#contact" class="nav-link" aria-label="Contact section">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="controls-switcher">
+            <button type="button" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle color theme">
+                <img src="assets/images/monitor-icon.png" alt="Theme icon" class="theme-icon">
+                Theme
+            </button>
+            <button type="button" id="music-toggle-btn" title="Toggle Music" aria-label="Toggle background music">
+                <img src="assets/images/music-icon.png" alt="Music icon" class="theme-icon">
+                Music
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section id="welcome" class="content-section terminal-window" aria-labelledby="welcome-title">
+            <div class="window-header">
+                <span id="welcome-title" class="window-title">C:\WELCOME.EXE</span>
+                <div class="window-buttons">
+                    <button type="button" class="window-btn" aria-label="Minimize">_</button>
+                    <button type="button" class="window-btn" aria-label="Maximize">□</button>
+                    <button type="button" class="window-btn close-btn" aria-label="Close">X</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <pre id="welcome-text" class="ascii-art-container" aria-live="polite"></pre>
+                <span class="blinking-cursor" aria-hidden="true">_</span>
+            </div>
+        </section>
+
+        <section id="about" class="content-section" aria-labelledby="about-title">
+            <h2 id="about-title"><span class="neon-blue">&gt;</span> About Me</h2>
+            <div class="about-content">
+                <div class="pixel-art-container">
+                    <img src="assets/images/your-pixel-photo.png" alt="Pixelated photo of [Your Name]" id="pixel-photo">
+                    <div class="photo-glitch-overlay" aria-hidden="true"></div>
+                </div>
+                <article class="bio">
+                    <p>Hey there! I'm [Your Name], a passionate Computer Engineering student with a love for all things retro and modern tech. I enjoy building cool stuff and exploring the endless possibilities of code.</p>
+                    <p>When I'm not debugging or designing circuits, you can find me [Your Hobby 1] or [Your Hobby 2].</p>
+                    <div class="contact-icons">
+                        <a href="mailto:aryanvala.edu@gmail.com" title="Email [Aryan Vala]" aria-label="Email [Aryan Vala]"><img src="assets/images/email-icon-lowres.png" alt="Email icon"></a>
+                        <a href="https://github.com/devbyaryanvala" target="_blank" rel="noopener noreferrer" title="[Aryan Vala]'s GitHub profile" aria-label="[Aryan Vala]'s GitHub profile"><img src="assets/images/github-icon-lowres.png" alt="GitHub icon"></a>
+                        <a href="https://linkedin.com/in/aryan-vala-ba62a1212" target="_blank" rel="noopener noreferrer" title="[Aryan Vala]'s LinkedIn profile" aria-label="[Aryan Vala]'s LinkedIn profile"><img src="assets/images/linkedin-icon-lowres.png" alt="LinkedIn icon"></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section" aria-labelledby="projects-title">
+            <h2 id="projects-title"><span class="neon-green">&gt;</span> Projects</h2>
+            <div class="projects-grid">
+                <article class="project-item" data-project-id="proj1" tabindex="0" aria-labelledby="project-alpha-title">
+                    <img src="assets/images/project1-thumb-lowres.png" alt="Thumbnail for Project Alpha">
+                    <h3 id="project-alpha-title">Project Showcase</h3>
+                    <p class="tooltip">A Webpage to showcase my projects. Click for more!</p>
+                </article>
+                <article class="project-item" data-project-id="proj2" tabindex="0" aria-labelledby="project-emulator-title">
+                    <img src="assets/images/project2-thumb-lowres.png" alt="Thumbnail for Retro Game Emulator">
+                    <h3 id="project-emulator-title">Old Portfolio</h3>
+                    <p class="tooltip">My previous Portfolio or so called portfolio. Click for details.</p>
+                </article>
+                </div>
+        </section>
+
+        <section id="skills" class="content-section" aria-labelledby="skills-title">
+            <h2 id="skills-title"><span class="neon-blue">&gt;</span> Skills</h2>
+            <div class="skills-container dos-output">
+                <p aria-hidden="true">C:\SYSTEM\SKILLCHK.EXE</p>
+                <p aria-hidden="true">Scanning system for skills...</p>
+                <div class="skill-item">
+                    <span class="skill-name">Python:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Python skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="95%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">JavaScript:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="JavaScript skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="80%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">C++:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="C++ skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="55%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">C:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="C++ skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="85%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">JAVA:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="C++ skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="80%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">HTML/CSS:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="HTML/CSS skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="90%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">OS(LINUX):</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="HTML/CSS skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="70%">0%</div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">NODE/EXPRESS:</span>
+                    <div class="progress-bar-old" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="HTML/CSS skill level">
+                        <div class="progress-fill" style="width: 0%;" data-skill-level="80%">0%</div>
+                    </div>
+                </div>
+                
+                <p aria-hidden="true">Skill scan complete. Ready. Will Add More</p>
+            </div>
+        </section>
+
+        <section id="resume" class="content-section" aria-labelledby="resume-title">
+            <h2 id="resume-title"><span class="neon-green">&gt;</span> Resume</h2>
+            <div class="resume-download">
+                <p>Want to know more? Download my full resume!</p>
+                <a href="assets/resume/resume.pdf" download="AryanVala_Resume.pdf" class="download-button old-hyperlink">
+                    Download_Resume.pdf <span class="file-size">(~0.083MB)</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section guestbook-style" aria-labelledby="contact-title">
+            <h2 id="contact-title"><span class="neon-blue">&gt;</span> Leave a Message (Guestbook)</h2>
+            <form id="contact-form" aria-describedby="form-status">
+                <div class="form-group">
+                    <label for="name">NAME:</label>
+                    <input type="text" id="name" name="name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">EMAIL:</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">MESSAGE:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">POST MESSAGE</button>
+                <p id="form-status" aria-live="polite"></p>
+                <p>If the from doesn't work, use (aryanvala.edu@gmail.com) to contact!</p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer-bottom">
+        <div class="marquee-container" aria-hidden="true">
+            <marquee behavior="scroll" direction="left" scrollamount="3">
+                ** Site optimized for Netscape Navigator 4.0 and Internet Explorer 5.0 -- Best viewed at 800x600 -- Under Construction! **
+            </marquee>
+        </div>
+        <p>You are visitor #<span id="visitor-count">000123</span></p>
+        <p class="retro-copyright">&copy; 1999-<span id="current-year">[2025]</span> [Aryan Vala]. All rights reserved (mostly).</p>
+        <p id="konami-code-status" style="display:none; color: #0f0;" aria-live="assertive">Konami Code Activated! 🎮</p>
+    </footer>
+
+    <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" style="display: none;">
+        <div class="modal-content terminal-window">
+             <div class="window-header">
+                <span id="modal-project-title" class="window-title">PROJECT_DETAILS.TXT</span>
+                <div class="window-buttons">
+                    <button type="button" class="window-btn close-modal-btn" aria-label="Close project details modal">X</button>
+                </div>
+            </div>
+            <div class="window-content" id="modal-project-body">
+                </div>
+        </div>
+    </div>
+
+    <audio id="chiptune-music" loop preload="none">
+        <source src="assets/audio/chiptune.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="js/main.js"></script>
+    <script src="js/easter-eggs.js"></script>
+    </body>
+</HTML>

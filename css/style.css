@@ -1,0 +1,904 @@
+/* Proto/css/style.css */
+/* --- CSS Custom Properties (Variables) --- */
+:root {
+    --font-pixel: 'PixelFont', 'Courier New', monospace;
+    --font-retro-mono: 'RetroMono', 'Lucida Console', monospace;
+    --font-sans-serif: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+
+    /* Base Theme Colors (Primarily for CRT, can be overridden by flat theme) */
+    --primary-text-color: #ccc;
+    --primary-bg-color: #0a0a1f;
+    --header-bg-color: rgba(10, 10, 31, 0.8);
+    --header-border-color: #39ff14;
+    --nav-link-color: #39ff14;
+    --nav-link-hover-color: #fff;
+    --nav-link-active-border-color: #fff;
+    --neon-blue: #00ffff;
+    --neon-green: #39ff14;
+    --terminal-bg-color: rgba(0, 0, 0, 0.6);
+    --terminal-border-color: #555;
+    --terminal-shadow-color: #333;
+    --terminal-header-bg: #444;
+    --terminal-header-text: #fff;
+    --terminal-content-color: #0f0;
+    --button-primary-bg: #555;
+    --button-primary-text: #fff;
+    --button-primary-border: #777;
+    --hyperlink-color: #007bff;
+    --hyperlink-border-color: #007bff;
+    --hyperlink-hover-bg: #007bff;
+    --hyperlink-hover-text: #fff;
+    --selection-bg: #39ff14;
+    --selection-text: #0a0a1f;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease-in-out;
+    --transition-normal: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease;
+}
+
+
+/* --- Fonts --- */
+@font-face {
+    font-family: 'PixelFont';
+    src: url('../assets/fonts/pixel-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RetroMono';
+    src: url('../assets/fonts/retro-mono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- Basic Reset & Body --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* For smooth scrolling from nav links */
+}
+
+body {
+    font-family: var(--font-retro-mono); /* Default to retro mono */
+    line-height: 1.6;
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    transition: background-color var(--transition-slow), color var(--transition-slow);
+    overflow-x: hidden;
+    position: relative; /* For overlays */
+}
+
+.overlay-scanlines, .overlay-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998; /* Adjusted z-index */
+}
+
+
+/* --- Dial-up Overlay --- */
+#dial-up-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #0f0; /* Terminal green */
+    font-family: var(--font-retro-mono);
+    text-align: center;
+    opacity: 1;
+    transition: opacity var(--transition-slow) var(--transition-slow); /* Delay fade out */
+}
+#dial-up-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#dial-up-content p {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+.connecting-text-animation {
+    animation: pulseConnectText 1.5s infinite ease-in-out;
+}
+@keyframes pulseConnectText {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.progress-bar-dialup {
+    width: 80%;
+    max-width: 400px;
+    height: 20px;
+    background-color: #333;
+    border: 1px solid #0f0;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.progress-bar-fill-dialup {
+    width: 0%;
+    height: 100%;
+    background-color: #0f0;
+    transition: width 0.15s linear;
+    border-radius: 2px;
+}
+
+
+/* --- Header & Navigation --- */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg-color);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* Safari */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 2px solid var(--header-border-color);
+    box-shadow: 0 2px 10px rgba(57, 255, 20, 0.3);
+    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+.logo-container .nav-link-logo {
+    font-family: var(--font-pixel);
+    font-size: 1.5em;
+    color: var(--nav-link-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+.logo-container .nav-link-logo:hover {
+    color: var(--nav-link-hover-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin-right: 15px;
+}
+.nav-links li:last-child {
+    margin-right: 0;
+}
+.nav-link {
+    font-family: var(--font-pixel);
+    text-decoration: none;
+    color: var(--nav-link-color);
+    font-size: 1.1em;
+    padding: 5px 8px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: color var(--transition-fast), border-color var(--transition-fast), text-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--nav-link-hover-color);
+    border-color: var(--nav-link-active-border-color);
+    text-shadow: 0 0 8px var(--nav-link-hover-color);
+}
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.controls-switcher {
+    display: flex;
+    align-items: center;
+}
+.controls-switcher button {
+    background: none;
+    border: 1px solid var(--nav-link-color);
+    color: var(--nav-link-color);
+    padding: 6px 8px; /* Slightly larger padding */
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    border-radius: 3px;
+    display: flex; /* For aligning icon */
+    align-items: center; /* For aligning icon */
+    justify-content: center; /* For aligning icon */
+}
+.controls-switcher button:hover {
+    background-color: var(--nav-link-color);
+    color: var(--primary-bg-color); /* Or specific theme background */
+    box-shadow: 0 0 10px var(--nav-link-color);
+}
+.controls-switcher .theme-icon {
+    width: 20px;
+    height: 20px;
+    display: block; /* Ensure it behaves as a block */
+}
+/* Default CRT icon tint */
+.crt-theme .controls-switcher .theme-icon {
+    filter: invert(50%) sepia(100%) saturate(400%) hue-rotate(90deg);
+}
+
+/* --- General Section Styling --- */
+.content-section {
+    padding: 100px 20px 40px; /* Increased top padding for fixed header */
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 80vh;
+    border-bottom: 1px dashed rgba(204, 204, 204, 0.2);
+    animation: sectionFadeIn 0.7s ease-out forwards;
+    opacity: 0; /* Start hidden for animation */
+}
+@keyframes sectionFadeIn {
+    to { opacity: 1; }
+}
+.content-section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    font-family: var(--font-pixel);
+    font-size: clamp(2em, 5vw, 2.8em); /* Responsive font size */
+    margin-bottom: 30px;
+    color: #fff; /* Default white for headings if not neon */
+    text-align: left;
+}
+.neon-blue { color: var(--neon-blue); }
+.neon-green { color: var(--neon-green); }
+
+
+/* --- Terminal Window Style --- */
+.terminal-window {
+    background-color: var(--terminal-bg-color);
+    border: 2px solid var(--terminal-border-color);
+    box-shadow: 5px 5px 0px var(--terminal-shadow-color);
+    margin-bottom: 30px;
+    border-radius: 5px; /* Subtle rounding */
+    animation: fadeInWindow 0.5s ease-out forwards; /* MODIFIED: Added 'forwards' */
+    transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+@keyframes fadeInWindow {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.window-header {
+    background-color: var(--terminal-header-bg);
+    color: var(--terminal-header-text);
+    padding: 8px 12px;
+    font-family: var(--font-retro-mono);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--terminal-border-color);
+    border-top-left-radius: 3px; /* Match parent */
+    border-top-right-radius: 3px; /* Match parent */
+    transition: background-color var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal);
+}
+.window-title { font-weight: bold; }
+.window-buttons button.window-btn { /* Changed span to button */
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: #888;
+    border: 1px solid #333;
+    margin-left: 5px;
+    text-align: center;
+    line-height: 10px; /* Adjust if needed */
+    font-size: 10px;
+    cursor: pointer; /* Make them look clickable */
+    color: #111;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 0; /* Remove default button padding */
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+.window-buttons button.window-btn:hover {
+    transform: scale(1.1);
+}
+.window-buttons button.close-btn { background-color: #c00; color: #fff; }
+.window-buttons button.close-btn:hover { background-color: #e00; }
+
+
+.window-content {
+    padding: 15px;
+    font-family: var(--font-retro-mono);
+    color: var(--terminal-content-color);
+    min-height: 150px;
+    max-height: 400px; /* Added max-height for scroll */
+    overflow-y: auto; /* Scroll if content overflows */
+    line-height: 1.4;
+    transition: color var(--transition-normal);
+}
+/* Custom scrollbar for terminal (Webkit browsers) */
+.window-content::-webkit-scrollbar {
+    width: 8px;
+}
+.window-content::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+}
+.window-content::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 4px;
+}
+.window-content::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
+}
+
+
+/* --- Welcome Banner --- */
+#welcome-text {
+    font-size: clamp(0.9em, 2.5vw, 1.1em); /* Responsive font size */
+    white-space: pre-wrap; /* Allow wrapping but preserve spaces */
+    line-height: 1.3;
+    color: var(--neon-green); /* Default to neon green */
+}
+.blinking-cursor {
+    animation: blink 1s step-end infinite;
+    font-weight: bold;
+    margin-left: 2px;
+    color: var(--neon-green); /* Default to neon green */
+    display: inline-block; /* Ensure it's on the same line */
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- About Me --- */
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Increased gap */
+    align-items: flex-start;
+}
+.pixel-art-container {
+    flex-basis: 200px;
+    flex-shrink: 0; /* Prevent shrinking on smaller screens before wrapping */
+    position: relative;
+}
+#pixel-photo {
+    width: 100%;
+    border: 3px solid var(--terminal-border-color);
+    image-rendering: pixelated; /* Keep it crispy */
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    display: block; /* Remove extra space below image */
+}
+#pixel-photo:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+.photo-glitch-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+}
+.bio {
+    flex: 1;
+    min-width: 300px;
+    font-family: var(--font-sans-serif); /* Cleaner font for bio */
+    color: var(--primary-text-color); /* Use CSS variable */
+    line-height: 1.7;
+}
+.bio p {
+    margin-bottom: 1em;
+}
+
+.contact-icons {
+    margin-top: 15px;
+}
+.contact-icons a {
+    display: inline-block; /* Allows transform and margin */
+    margin-right: 12px;
+    transition: transform var(--transition-fast);
+}
+.contact-icons img {
+    width: 32px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: border-color var(--transition-fast), filter var(--transition-fast);
+    vertical-align: middle; /* Better alignment */
+}
+.contact-icons a:hover img {
+    border-color: var(--neon-blue);
+    filter: drop-shadow(0 0 5px var(--neon-blue));
+}
+.contact-icons a:hover {
+    transform: translateY(-3px);
+}
+
+
+/* --- Projects --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly larger minmax */
+    gap: 25px;
+}
+.project-item {
+    background-color: rgba(30, 30, 50, 0.7);
+    border: 2px solid #4a4a6a;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    position: relative;
+    border-radius: 5px;
+    display: flex; /* For better internal alignment */
+    flex-direction: column; /* Stack image, title, tooltip */
+    justify-content: space-between; /* Push tooltip container to bottom */
+}
+.project-item:hover, .project-item:focus-within { /* Added focus-within for keyboard nav */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.25);
+    border-color: var(--neon-blue);
+}
+.project-item:focus {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 3px;
+}
+
+.project-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    image-rendering: pixelated;
+    border-radius: 3px;
+}
+.project-item h3 {
+    font-family: var(--font-pixel);
+    color: var(--neon-blue);
+    margin-bottom: 10px; /* Increased margin */
+    font-size: 1.3em;
+}
+.project-item p.tooltip {
+    font-size: 0.9em;
+    color: #fff;
+    background-color: #222;
+    padding: 6px 10px;
+    border-radius: 3px;
+    white-space: normal; /* Allow wrapping for longer tooltips */
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast) 0.1s, visibility 0s linear 0.3s, transform var(--transition-fast) 0.1s;
+    width: calc(100% - 20px); /* Adjust width to fit inside padding */
+    position: absolute;
+    bottom: 10px; /* Positioned at the bottom */
+    left: 10px;
+    transform: translateY(10px); /* Initial state for animation */
+}
+.project-item:hover p.tooltip,
+.project-item:focus-within p.tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0.1s, 0s, 0.1s;
+}
+
+
+/* --- Skills (DOS Output Style) --- */
+.skills-container.dos-output {
+    background-color: #000;
+    border: 2px solid var(--neon-green);
+    padding: 20px;
+    font-family: var(--font-retro-mono);
+    color: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green) inset, 0 0 5px var(--neon-green);
+    border-radius: 5px;
+    transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+.skills-container p { margin-bottom: 8px; }
+.skill-item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping for skill name if too long */
+}
+.skill-name {
+    min-width: 120px;
+    display: inline-block;
+    margin-right: 10px; /* Add some space between name and bar */
+    margin-bottom: 5px; /* Space if it wraps */
+}
+.progress-bar-old {
+    flex-grow: 1;
+    height: 22px;
+    background-color: #333;
+    border: 1px solid var(--neon-green);
+    padding: 2px;
+    overflow: hidden;
+    border-radius: 3px;
+    min-width: 150px; /* Ensure bar has some width */
+}
+.progress-fill {
+    background-color: var(--neon-green);
+    height: 100%;
+    width: 0%; /* Initial state */
+    transition: width 1s ease-out 0.2s; /* Added delay for staggered effect */
+    text-align: right;
+    padding-right: 8px;
+    font-size: 0.85em;
+    line-height: 16px; /* Center text in bar */
+    color: #000;
+    border-radius: 2px;
+    display: flex; /* For centering text */
+    align-items: center; /* For centering text */
+    justify-content: flex-end; /* For centering text */
+}
+
+
+/* --- Resume --- */
+.resume-download { text-align: center; padding: 20px 0; }
+.resume-download p { margin-bottom: 15px; font-size: 1.1em; }
+
+.old-hyperlink, .download-button { /* Combined for consistency */
+    display: inline-block;
+    font-family: var(--font-retro-mono);
+    color: var(--hyperlink-color);
+    text-decoration: none; /* Remove underline, border provides emphasis */
+    padding: 12px 20px;
+    border: 2px dashed var(--hyperlink-border-color);
+    margin-top: 15px;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-style var(--transition-fast), transform var(--transition-fast);
+    border-radius: 4px;
+}
+.old-hyperlink:hover, .download-button:hover {
+    background-color: var(--hyperlink-hover-bg);
+    color: var(--hyperlink-hover-text);
+    border-style: solid;
+    transform: scale(1.03);
+}
+.file-size { font-size: 0.8em; color: #999; margin-left: 5px;}
+
+
+/* --- Contact Form (Guestbook Style) --- */
+.guestbook-style {
+    background-color: rgba(50, 50, 70, 0.5);
+    padding: 25px;
+    border: 2px outset #777;
+    border-radius: 5px;
+    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+#contact-form label {
+    display: block;
+    margin-bottom: 8px; /* Increased margin */
+    font-family: var(--font-retro-mono);
+    color: var(--primary-text-color);
+    font-size: 1.05em;
+}
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Increased margin */
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    font-family: var(--font-retro-mono);
+    outline: none;
+    border-radius: 3px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+#contact-form input[type="text"]:focus,
+#contact-form input[type="email"]:focus,
+#contact-form textarea:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 8px var(--neon-blue);
+    background-color: #3a3a3a;
+}
+
+.submit-button {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border: 2px outset var(--button-primary-border);
+    padding: 12px 25px; /* Increased padding */
+    font-family: var(--font-pixel);
+    font-size: 1.2em; /* Increased font size */
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), border-style var(--transition-fast), box-shadow var(--transition-fast);
+    border-radius: 4px;
+}
+.submit-button:hover {
+    background-color: #666;
+    box-shadow: 0 0 10px #888;
+}
+.submit-button:active {
+    transform: translateY(2px) scale(0.98);
+    border-style: inset;
+    box-shadow: none;
+}
+.submit-button:focus {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 2px;
+}
+
+#form-status {
+    margin-top: 15px;
+    font-family: var(--font-retro-mono);
+    color: var(--neon-green);
+    font-weight: bold;
+    min-height: 1.5em; /* Reserve space to prevent layout shift */
+}
+
+/* --- Footer --- */
+.main-footer-bottom { /* Renamed to avoid conflict with header class if any */
+    text-align: center;
+    padding: 25px 20px;
+    background-color: #111;
+    color: #888; /* Slightly lighter grey */
+    font-size: 0.9em;
+    font-family: var(--font-retro-mono);
+    border-top: 2px solid #333;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+.marquee-container {
+    background-color: #000;
+    color: #ff0000;
+    padding: 8px 0; /* Increased padding */
+    margin-bottom: 15px;
+    font-family: var(--font-sans-serif);
+    font-weight: bold;
+    border-radius: 3px;
+    overflow: hidden; /* Ensure marquee text doesn't overflow visibly */
+}
+#visitor-count {
+    font-weight: bold;
+    color: #ffff00;
+}
+.retro-copyright { margin-top: 8px; }
+#konami-code-status {
+    margin-top: 10px;
+}
+
+
+/* --- Modal Styling --- */
+.modal {
+    /* display: none; Set by JS */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Only if modal content itself is too tall */
+    background-color: rgba(0,0,0,0.75); /* Slightly darker overlay */
+    display: flex; /* For centering modal content */
+    align-items: center; /* For centering modal content */
+    justify-content: center; /* For centering modal content */
+    opacity: 0; /* Start hidden for fade-in */
+    visibility: hidden; /* Start hidden for fade-in */
+    transition: opacity var(--transition-normal), visibility 0s linear var(--transition-normal);
+}
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Show immediately */
+}
+
+.modal-content {
+    position: relative;
+    padding: 0; /* Padding is handled by window-header/content */
+    width: 90%;
+    max-width: 700px;
+    /* Uses .terminal-window styles */
+    border-radius: 5px; /* Match terminal window */
+    transform: scale(0.95); /* Start slightly smaller for pop effect */
+    transition: transform var(--transition-normal);
+}
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal .close-modal-btn { /* Specificity for modal close button */
+    background-color: #c00 !important; /* Ensure it overrides general .window-btn */
+    color: #fff !important;
+}
+.modal .close-modal-btn:hover {
+    background-color: #e00 !important;
+}
+
+
+#modal-project-body {
+    font-family: var(--font-sans-serif);
+    color: var(--primary-text-color); /* Use CSS var */
+    line-height: 1.8;
+}
+#modal-project-body img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 3px;
+}
+#modal-project-body ul {
+    list-style-position: inside;
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+#modal-project-body li {
+    margin-bottom: 0.5em;
+}
+#modal-project-body a.old-hyperlink {
+    margin-right: 10px;
+}
+
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+}
+.visually-hidden { /* For accessibility, hide visually but not from screen readers */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- Print Styles --- */
+@media print {
+    body {
+        background-color: #fff;
+        color: #000;
+        font-family: 'Times New Roman', serif;
+    }
+    .main-header, .theme-switcher, #dial-up-overlay, .overlay-scanlines, .overlay-vignette, footer .marquee-container, #music-toggle-btn, .project-item p.tooltip {
+        display: none;
+    }
+    .content-section {
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+        min-height: auto;
+    }
+    h2 { color: #000; }
+    .terminal-window, .skills-container.dos-output, .guestbook-style {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        background-color: #f9f9f9;
+    }
+    .window-content, .skills-container.dos-output { color: #333; }
+    .old-hyperlink::after { content: " (" attr(href) ")"; }
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    body { font-size: 15px; }
+    .main-header {
+        padding: 10px 15px;
+        flex-direction: column; /* Stack logo/nav/controls */
+        align-items: flex-start;
+    }
+    .logo-container { margin-bottom: 10px; }
+    .nav-links {
+        /* Basic mobile nav: consider a JS-driven hamburger menu for better UX */
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        margin-top: 10px;
+        background-color: var(--header-bg-color); /* Add background for stacked nav */
+    }
+    .nav-links li { margin-right: 0; width: 100%; }
+    .nav-link { display: block; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nav-link.active, .nav-link:hover { border-color: transparent; border-left: 3px solid var(--nav-link-hover-color); }
+
+    .controls-switcher {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .content-section { padding: 80px 15px 30px; }
+    h2 { font-size: clamp(1.8em, 4vw, 2.2em); }
+
+    .about-content { flex-direction: column; align-items: center; text-align: center; }
+    .pixel-art-container { margin-bottom: 20px; max-width: 180px; }
+    .bio { text-align: left; } /* Keep bio text left-aligned */
+
+    .projects-grid { grid-template-columns: 1fr; }
+    .skill-item { flex-direction: column; align-items: flex-start;}
+    .skill-name { margin-bottom: 8px; }
+    .progress-bar-old { width: 100%; }
+
+    .modal-content { width: 90%; margin-top: 15%; max-height: 80vh; overflow-y: auto; }
+    #welcome-text { font-size: clamp(0.8em, 2vw, 1em); }
+}
+
+@media (max-width: 480px) {
+    .main-header { padding: 10px; }
+    .logo-container .nav-link-logo { font-size: 1.3em; }
+    .controls-switcher button { padding: 5px; }
+    .controls-switcher .theme-icon { width: 18px; height: 18px; }
+
+    .content-section { padding: 70px 10px 25px; }
+    h2 { font-size: clamp(1.6em, 3.5vw, 2em); }
+    #contact-form input, #contact-form textarea, .submit-button { padding: 10px; }
+    .submit-button { width: 100%; font-size: 1.1em; }
+    .main-footer-bottom { padding: 20px 10px; font-size: 0.85em; }
+}
+
+/* Selection styling */
+::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
+}
+::-moz-selection { /* Firefox */
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
+}
+
+/* Body flash for Konami Code - more impactful */
+@keyframes konamiGlobalFlash {
+    0%, 100% { background-color: var(--primary-bg-color); filter: brightness(1) contrast(1) saturate(1) invert(0) hue-rotate(0deg); }
+    25% { background-color: #ff00ff; filter: brightness(1.5) contrast(1.2) saturate(3) invert(0.2) hue-rotate(45deg); }
+    50% { background-color: #00ffff; filter: brightness(1.3) contrast(1.5) saturate(2) invert(0.5) hue-rotate(90deg); }
+    75% { background-color: #ffff00; filter: brightness(1.7) contrast(1.3) saturate(4) invert(0.1) hue-rotate(135deg); }
+}
+body.konami-flash-active {
+    animation: konamiGlobalFlash 0.2s 5 linear; /* 5 quick flashes */
+}
+
+/* Matrix effect container */
+.matrix-effect-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10001; /* Above dial-up if active during load, but below modal */
+    pointer-events: none;
+    background-color: rgba(0,0,0,0.1); /* Slight dark tint during effect */
+}
+.matrix-effect-container span.matrix-char {
+    position: absolute;
+    color: var(--neon-green);
+    font-family: var(--font-retro-mono);
+    font-size: 16px; /* Fixed size for matrix effect */
+    text-shadow: 0 0 5px var(--neon-green);
+    user-select: none; /* Prevent text selection */
+    animation: matrixFadeAndFall linear forwards;
+}
+
+@keyframes matrixFadeAndFall {
+    0% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(100vh); } /* Fall off screen */
+}
+
+/* God mode visitor counter styling */
+#visitor-count.god-mode-active {
+    color: #FFD700 !important; /* Gold color, important to override theme */
+    font-weight: bold !important;
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFF, 0 0 15px #FF8C00 !important; /* Intense glow */
+    animation: godModePulseEffect 0.3s 5 alternate; /* Pulse 5 times */
+    transition: color 0.1s ease-in-out, text-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+@keyframes godModePulseEffect {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
