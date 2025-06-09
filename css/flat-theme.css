@@ -1,43 +1,47 @@
-.flat-theme {
-    --primary-text-color: #4A5568;
-    --primary-bg-color: #F7FAFC;
-    --header-bg-color: #FFFFFF;
-    --header-border-color: #E2E8F0;
-    --nav-link-color: #4A5568;
-    --nav-link-hover-color: #2B6CB0;
-    --nav-link-active-border-color: #2B6CB0;
-    --neon-blue: #3182CE;
-    --neon-green: #38A169;
-    --terminal-bg-color: #FFFFFF;
-    --terminal-border-color: #E2E8F0;
-    --terminal-shadow-color: rgba(0,0,0,0.1);
-    --terminal-header-bg: #EDF2F7;
-    --terminal-header-text: #4A5568;
-    --terminal-content-color: #2D3748;
-    --button-primary-bg: #3182CE;
-    --button-primary-text: #FFFFFF;
-    --button-primary-border: transparent;
-    --hyperlink-color: #3182CE;
-    --hyperlink-border-color: #A0AEC0;
-    --hyperlink-hover-bg: #3182CE;
-    --hyperlink-hover-text: #FFFFFF;
-    --selection-bg: #BEE3F8;
-    --selection-text: #2D3748;
+/* Proto/css/flat-theme.css */
+/* Flat Theme Specifics */
 
-    font-family: var(--font-sans-serif);
-    transition: background-color var(--transition-normal), color var(--transition-normal);
+body.flat-theme {
+    --primary-text-color: #4A5568; /* Dark Slate Gray for text */
+    --primary-bg-color: #F7FAFC;   /* Very Light Gray for background */
+    --header-bg-color: #FFFFFF;
+    --header-border-color: #E2E8F0; /* Light Gray border */
+    --nav-link-color: #4A5568;      /* Medium Gray for nav links */
+    --nav-link-hover-color: #2B6CB0;/* Dark Blue for hover/active */
+    --nav-link-active-border-color: #2B6CB0;
+    --neon-blue: #3182CE;  /* Standard Blue */
+    --neon-green: #38A169; /* Standard Green */
+    --terminal-bg-color: #FFFFFF;
+    --terminal-border-color: #E2E8F0;
+    --terminal-shadow-color: rgba(0,0,0,0.1); /* Soft shadow */
+    --terminal-header-bg: #EDF2F7; /* Light Gray Blue for header */
+    --terminal-header-text: #4A5568;
+    --terminal-content-color: #2D3748; /* Darker text for terminal content */
+    --button-primary-bg: #3182CE; /* Blue for buttons */
+    --button-primary-text: #FFFFFF;
+    --button-primary-border: transparent; /* No border for flat buttons */
+    --hyperlink-color: #3182CE;
+    --hyperlink-border-color: #A0AEC0; /* Lighter border for links */
+    --hyperlink-hover-bg: #3182CE;
+    --hyperlink-hover-text: #FFFFFF;
+    --selection-bg: #BEE3F8; /* Light Blue selection */
+    --selection-text: #2D3748;
+
+    font-family: var(--font-sans-serif); /* Override default retro mono */
+    transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
 .flat-theme .overlay-scanlines,
 .flat-theme .overlay-vignette {
-    display: none;
+    display: none;
 }
 
 .flat-theme h2 {
-    color: #2C5282;
-    text-shadow: none;
-    transition: color var(--transition-fast);
+    color: #2C5282; /* Darker blue for headings */
+    text-shadow: none;
+    transition: color var(--transition-fast);
 }
+/* Remove text flicker from elements that might inherit it from base CRT styles */
 .flat-theme .nav-link,
 .flat-theme .window-title,
 .flat-theme .submit-button,
@@ -48,71 +52,71 @@
 .flat-theme .old-hyperlink,
 .flat-theme #visitor-count,
 .flat-theme footer .retro-copyright {
-    text-shadow: none;
-    animation: none;
+    text-shadow: none;
+    animation: none; /* Remove any inherited flicker animations */
 }
 
 
 .flat-theme .main-header {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    backdrop-filter: blur(8px); /* Slightly stronger blur for flat */
+    -webkit-backdrop-filter: blur(8px);
 }
 .flat-theme .logo-container .nav-link-logo {
-    color: var(--nav-link-hover-color);
+    color: var(--nav-link-hover-color); /* Use a more prominent color for logo */
 }
 
 .flat-theme .nav-link {
-    font-family: 'Segoe UI Semibold', var(--font-sans-serif);
-    border-bottom: 2px solid transparent;
-    padding-bottom: 3px;
-    transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
+    font-family: 'Segoe UI Semibold', var(--font-sans-serif); /* Slightly bolder nav font */
+    border-bottom: 2px solid transparent; /* Prepare for active state underline */
+    padding-bottom: 3px; /* Adjust padding for underline */
+    transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
 }
 .flat-theme .nav-link:hover,
 .flat-theme .nav-link.active {
-    color: var(--nav-link-hover-color);
-    border-bottom-color: var(--nav-link-active-border-color);
-    background-color: transparent;
+    color: var(--nav-link-hover-color);
+    border-bottom-color: var(--nav-link-active-border-color); /* Underline for active/hover */
+    background-color: transparent; /* Remove general active background */
 }
 
 .flat-theme .controls-switcher button {
-    border: 1px solid #CBD5E0;
-    color: var(--primary-text-color);
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    border: 1px solid #CBD5E0; /* Light Gray border */
+    color: var(--primary-text-color);
+    background-color: #fff; /* White background for buttons */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .flat-theme .controls-switcher button:hover {
-    background-color: #E2E8F0;
-    color: #2D3748;
-    border-color: #A0AEC0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    background-color: #E2E8F0; /* Light Gray hover */
+    color: #2D3748; /* Darker text on hover */
+    border-color: #A0AEC0; /* Slightly darker border */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
 }
 .flat-theme .controls-switcher .theme-icon {
-    filter: none;
+    filter: none; /* No tint for flat theme icons */
 }
 
 
 .flat-theme .terminal-window {
-    box-shadow: 0 4px 12px var(--terminal-shadow-color);
-    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--terminal-shadow-color);
+    border-radius: 8px; /* Rounded corners */
 }
 .flat-theme .window-header {
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: 7px; /* Align with parent's border-radius */
+    border-top-right-radius: 7px;
 }
 .flat-theme .window-buttons button.window-btn {
-    background-color: #CBD5E0;
-    border: 1px solid #A0AEC0;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    line-height: 10px;
-    font-size: 8px;
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    background-color: #CBD5E0;
+    border: 1px solid #A0AEC0;
+    border-radius: 50%; /* Circular buttons */
+    width: 12px;
+    height: 12px;
+    line-height: 10px; /* Adjust for circle */
+    font-size: 8px; /* Smaller icons for circular buttons */
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
 .flat-theme .window-buttons button.window-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.1);
 }
 .flat-theme .window-buttons button.close-btn { background-color: #FC8181; border-color: #E53E3E; }
 .flat-theme .window-buttons button.close-btn:hover { background-color: #F56565; }
@@ -123,183 +127,184 @@
 
 .flat-theme .bio { color: var(--primary-text-color); }
 .flat-theme .contact-icons img {
-    border-radius: 4px;
-    opacity: 0.85;
-    transition: opacity var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    border-radius: 4px;
+    opacity: 0.85;
+    transition: opacity var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 .flat-theme .contact-icons a:hover img {
-    opacity: 1;
-    border-color: transparent;
-    filter: none;
-    box-shadow: 0 2px 6px rgba(49, 130, 206, 0.3);
+    opacity: 1;
+    border-color: transparent; /* Remove border, rely on shadow */
+    filter: none;
+    box-shadow: 0 2px 6px rgba(49, 130, 206, 0.3); /* Blueish shadow */
 }
 .flat-theme .contact-icons a:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Subtle lift */
 }
 
 
 .flat-theme .project-item {
-    background-color: #fff;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border-radius: 6px;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    background-color: #fff;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 6px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 .flat-theme .project-item:hover,
 .flat-theme .project-item:focus-within {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-    border-color: #CBD5E0;
-    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    border-color: #CBD5E0;
+    transform: translateY(-4px); /* Slightly more lift */
 }
 .flat-theme .project-item:focus {
-    outline: 2px solid var(--neon-blue);
-    outline-offset: 2px;
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 2px;
 }
 .flat-theme .project-item h3 { color: #2C5282; }
 .flat-theme .project-item p.tooltip {
-    background-color: #2D3748;
-    color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    font-size: 0.85em;
+    background-color: #2D3748; /* Dark background for tooltip */
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    font-size: 0.85em;
 }
 
 
 .flat-theme .skills-container.dos-output {
-    background-color: #EDF2F7;
-    border: 1px solid #E2E8F0;
-    color: var(--primary-text-color);
-    box-shadow: none;
-    border-radius: 6px;
+    background-color: #EDF2F7; /* Light Gray Blue background */
+    border: 1px solid #E2E8F0;
+    color: var(--primary-text-color);
+    box-shadow: none;
+    border-radius: 6px;
 }
 .flat-theme .skills-container.dos-output p { color: #4A5568; }
 .flat-theme .skills-container.dos-output .skill-name { color: #2C5282; font-weight: 500; }
 
 .flat-theme .progress-bar-old {
-    background-color: #E2E8F0;
-    border: 1px solid #CBD5E0;
-    border-radius: 10px;
-    height: 20px;
+    background-color: #E2E8F0; /* Lighter background for progress bar */
+    border: 1px solid #CBD5E0;
+    border-radius: 10px; /* More rounded bar */
+    height: 20px;
 }
 .flat-theme .progress-fill {
-    background-color: var(--neon-blue);
-    color: #fff;
-    border-radius: 8px;
-    line-height: 18px;
-    font-size: 0.8em;
-    font-weight: 500;
+    background-color: var(--neon-blue); /* Blue progress fill */
+    color: #fff;
+    border-radius: 8px; /* Match parent rounding */
+    line-height: 18px; /* Adjust for bar height */
+    font-size: 0.8em;
+    font-weight: 500;
 }
 
 
 .flat-theme .old-hyperlink, .flat-theme .download-button {
-    color: var(--hyperlink-color);
-    border: 1px solid var(--hyperlink-border-color);
-    border-radius: 4px;
-    text-decoration: none;
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    color: var(--hyperlink-color);
+    border: 1px solid var(--hyperlink-border-color); /* Solid border */
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #fff; /* Add background for better definition */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 .flat-theme .old-hyperlink:hover, .flat-theme .download-button:hover {
-    background-color: var(--hyperlink-hover-bg);
-    color: var(--hyperlink-hover-text);
-    border-color: var(--hyperlink-hover-bg);
-    box-shadow: 0 2px 4px rgba(49, 130, 206, 0.2);
-    transform: scale(1.03) translateY(-1px);
+    background-color: var(--hyperlink-hover-bg);
+    color: var(--hyperlink-hover-text);
+    border-color: var(--hyperlink-hover-bg);
+    box-shadow: 0 2px 4px rgba(49, 130, 206, 0.2);
+    transform: scale(1.03) translateY(-1px);
 }
 
 
 .flat-theme .guestbook-style {
-    background-color: #fff;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 6px;
 }
 .flat-theme #contact-form label { color: #4A5568; font-weight: 500; }
 .flat-theme #contact-form input[type="text"],
 .flat-theme #contact-form input[type="email"],
 .flat-theme #contact-form textarea {
-    background-color: #fff;
-    border: 1px solid #CBD5E0;
-    color: #2D3748;
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 1em;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    background-color: #fff;
+    border: 1px solid #CBD5E0;
+    color: #2D3748;
+    border-radius: 4px;
+    padding: 12px; /* Increased padding for inputs */
+    font-size: 1em;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .flat-theme #contact-form input[type="text"]:focus,
 .flat-theme #contact-form input[type="email"]:focus,
 .flat-theme #contact-form textarea:focus {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3); /* Focus ring */
 }
 
 .flat-theme .submit-button {
-    background-color: var(--button-primary-bg);
-    color: var(--button-primary-text);
-    border: none;
-    border-radius: 4px;
-    padding: 12px 25px;
-    font-size: 1.1em;
-    font-weight: 500;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 .flat-theme .submit-button:hover {
-    background-color: #2B6CB0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+    background-color: #2B6CB0; /* Darker blue on hover */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
 }
 .flat-theme .submit-button:active {
-    transform: translateY(1px) scale(0.99);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 }
 .flat-theme .submit-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.4), 0 1px 3px rgba(0,0,0,0.1);
+    outline: none; /* Remove default, rely on box-shadow */
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.4), 0 1px 3px rgba(0,0,0,0.1);
 }
 .flat-theme #form-status {
-    color: var(--neon-green);
+    color: var(--neon-green); /* Standard green for success */
 }
-.flat-theme #form-status.error {
-    color: #E53E3E;
+.flat-theme #form-status.error { /* Add an error class for styling error messages */
+    color: #E53E3E; /* Red for errors */
 }
 
 
-.flat-theme footer.main-footer-bottom {
-    background-color: #EDF2F7;
-    border-top: 1px solid #E2E8F0;
-    color: #718096;
+.flat-theme footer.main-footer-bottom { /* Ensure specificity */
+    background-color: #EDF2F7; /* Light Gray Blue footer background */
+    border-top: 1px solid #E2E8F0;
+    color: #718096; /* Medium Gray text */
 }
 .flat-theme .marquee-container {
-    background-color: #E2E8F0;
-    color: #DD6B20;
-    border-radius: 4px;
-    padding: 6px 0;
+    background-color: #E2E8F0; /* Light Gray marquee background */
+    color: #DD6B20; /* Orange for info/warning style */
+    border-radius: 4px;
+    padding: 6px 0;
 }
 .flat-theme #visitor-count {
-    color: #D69E2E;
-    font-weight: 500;
+    color: #D69E2E; /* Dark Yellow */
+    font-weight: 500;
 }
 
+/* Modal specific styling for flat theme */
 .flat-theme .modal-content {
-    border-radius: 8px;
+    border-radius: 8px; /* Consistent rounding */
 }
 .flat-theme #modal-project-body {
-    color: var(--primary-text-color);
-    font-size: 0.95em;
+    color: var(--primary-text-color);
+    font-size: 0.95em;
 }
 .flat-theme #modal-project-body a.old-hyperlink {
-    font-size: 0.9em;
+    font-size: 0.9em;
 }
 
 
 .flat-theme ::selection {
-    background: var(--selection-bg);
-    color: var(--selection-text);
-    text-shadow: none;
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
 }
-.flat-theme ::-moz-selection {
-    background: var(--selection-bg);
-    color: var(--selection-text);
-    text-shadow: none;
+.flat-theme ::-moz-selection { /* Firefox */
+    background: var(--selection-bg);
+    color: var(--selection-text);
+    text-shadow: none;
 }
