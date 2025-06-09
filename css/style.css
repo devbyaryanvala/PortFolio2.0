@@ -1,11 +1,8 @@
-/* Proto/css/style.css */
-/* --- CSS Custom Properties (Variables) --- */
 :root {
     --font-pixel: 'PixelFont', 'Courier New', monospace;
     --font-retro-mono: 'RetroMono', 'Lucida Console', monospace;
     --font-sans-serif: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 
-    /* Base Theme Colors (Primarily for CRT, can be overridden by flat theme) */
     --primary-text-color: #ccc;
     --primary-bg-color: #0a0a1f;
     --header-bg-color: rgba(10, 10, 31, 0.8);
@@ -31,14 +28,11 @@
     --selection-bg: #39ff14;
     --selection-text: #0a0a1f;
 
-    /* Transitions */
     --transition-fast: 0.2s ease-in-out;
     --transition-normal: 0.3s ease-in-out;
     --transition-slow: 0.5s ease;
 }
 
-
-/* --- Fonts --- */
 @font-face {
     font-family: 'PixelFont';
     src: url('../assets/fonts/pixel-font.woff') format('woff');
@@ -54,7 +48,6 @@
     font-display: swap;
 }
 
-/* --- Basic Reset & Body --- */
 * {
     margin: 0;
     padding: 0;
@@ -62,17 +55,17 @@
 }
 
 html {
-    scroll-behavior: smooth; /* For smooth scrolling from nav links */
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: var(--font-retro-mono); /* Default to retro mono */
+    font-family: var(--font-retro-mono);
     line-height: 1.6;
     color: var(--primary-text-color);
     background-color: var(--primary-bg-color);
     transition: background-color var(--transition-slow), color var(--transition-slow);
     overflow-x: hidden;
-    position: relative; /* For overlays */
+    position: relative;
 }
 
 .overlay-scanlines, .overlay-vignette {
@@ -82,11 +75,9 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 9998; /* Adjusted z-index */
+    z-index: 9998;
 }
 
-
-/* --- Dial-up Overlay --- */
 #dial-up-overlay {
     position: fixed;
     top: 0;
@@ -99,11 +90,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #0f0; /* Terminal green */
+    color: #0f0;
     font-family: var(--font-retro-mono);
     text-align: center;
     opacity: 1;
-    transition: opacity var(--transition-slow) var(--transition-slow); /* Delay fade out */
+    transition: opacity var(--transition-slow) var(--transition-slow);
 }
 #dial-up-overlay.hidden {
     opacity: 0;
@@ -140,8 +131,6 @@ body {
     border-radius: 2px;
 }
 
-
-/* --- Header & Navigation --- */
 .main-header {
     position: fixed;
     top: 0;
@@ -149,7 +138,7 @@ body {
     width: 100%;
     background-color: var(--header-bg-color);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); /* Safari */
+    -webkit-backdrop-filter: blur(5px);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -207,39 +196,37 @@ body {
     background: none;
     border: 1px solid var(--nav-link-color);
     color: var(--nav-link-color);
-    padding: 6px 8px; /* Slightly larger padding */
+    padding: 6px 8px;
     margin-left: 10px;
     cursor: pointer;
     transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
     border-radius: 3px;
-    display: flex; /* For aligning icon */
-    align-items: center; /* For aligning icon */
-    justify-content: center; /* For aligning icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .controls-switcher button:hover {
     background-color: var(--nav-link-color);
-    color: var(--primary-bg-color); /* Or specific theme background */
+    color: var(--primary-bg-color);
     box-shadow: 0 0 10px var(--nav-link-color);
 }
 .controls-switcher .theme-icon {
     width: 20px;
     height: 20px;
-    display: block; /* Ensure it behaves as a block */
+    display: block;
 }
-/* Default CRT icon tint */
 .crt-theme .controls-switcher .theme-icon {
     filter: invert(50%) sepia(100%) saturate(400%) hue-rotate(90deg);
 }
 
-/* --- General Section Styling --- */
 .content-section {
-    padding: 100px 20px 40px; /* Increased top padding for fixed header */
+    padding: 100px 20px 40px;
     max-width: 900px;
     margin: 0 auto;
     min-height: 80vh;
     border-bottom: 1px dashed rgba(204, 204, 204, 0.2);
     animation: sectionFadeIn 0.7s ease-out forwards;
-    opacity: 0; /* Start hidden for animation */
+    opacity: 0;
 }
 @keyframes sectionFadeIn {
     to { opacity: 1; }
@@ -250,23 +237,21 @@ body {
 
 h2 {
     font-family: var(--font-pixel);
-    font-size: clamp(2em, 5vw, 2.8em); /* Responsive font size */
+    font-size: clamp(2em, 5vw, 2.8em);
     margin-bottom: 30px;
-    color: #fff; /* Default white for headings if not neon */
+    color: #fff;
     text-align: left;
 }
 .neon-blue { color: var(--neon-blue); }
 .neon-green { color: var(--neon-green); }
 
-
-/* --- Terminal Window Style --- */
 .terminal-window {
     background-color: var(--terminal-bg-color);
     border: 2px solid var(--terminal-border-color);
     box-shadow: 5px 5px 0px var(--terminal-shadow-color);
     margin-bottom: 30px;
-    border-radius: 5px; /* Subtle rounding */
-    animation: fadeInWindow 0.5s ease-out forwards; /* MODIFIED: Added 'forwards' */
+    border-radius: 5px;
+    animation: fadeInWindow 0.5s ease-out forwards;
     transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
@@ -284,12 +269,12 @@ h2 {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--terminal-border-color);
-    border-top-left-radius: 3px; /* Match parent */
-    border-top-right-radius: 3px; /* Match parent */
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     transition: background-color var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal);
 }
 .window-title { font-weight: bold; }
-.window-buttons button.window-btn { /* Changed span to button */
+.window-buttons button.window-btn {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -297,13 +282,13 @@ h2 {
     border: 1px solid #333;
     margin-left: 5px;
     text-align: center;
-    line-height: 10px; /* Adjust if needed */
+    line-height: 10px;
     font-size: 10px;
-    cursor: pointer; /* Make them look clickable */
+    cursor: pointer;
     color: #111;
     font-weight: bold;
     border-radius: 2px;
-    padding: 0; /* Remove default button padding */
+    padding: 0;
     transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
 .window-buttons button.window-btn:hover {
@@ -312,18 +297,16 @@ h2 {
 .window-buttons button.close-btn { background-color: #c00; color: #fff; }
 .window-buttons button.close-btn:hover { background-color: #e00; }
 
-
 .window-content {
     padding: 15px;
     font-family: var(--font-retro-mono);
     color: var(--terminal-content-color);
     min-height: 150px;
-    max-height: 400px; /* Added max-height for scroll */
-    overflow-y: auto; /* Scroll if content overflows */
+    max-height: 400px;
+    overflow-y: auto;
     line-height: 1.4;
     transition: color var(--transition-normal);
 }
-/* Custom scrollbar for terminal (Webkit browsers) */
 .window-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -338,44 +321,41 @@ h2 {
     background: var(--neon-blue);
 }
 
-
-/* --- Welcome Banner --- */
 #welcome-text {
-    font-size: clamp(0.9em, 2.5vw, 1.1em); /* Responsive font size */
-    white-space: pre-wrap; /* Allow wrapping but preserve spaces */
+    font-size: clamp(0.9em, 2.5vw, 1.1em);
+    white-space: pre-wrap;
     line-height: 1.3;
-    color: var(--neon-green); /* Default to neon green */
+    color: var(--neon-green);
 }
 .blinking-cursor {
     animation: blink 1s step-end infinite;
     font-weight: bold;
     margin-left: 2px;
-    color: var(--neon-green); /* Default to neon green */
-    display: inline-block; /* Ensure it's on the same line */
+    color: var(--neon-green);
+    display: inline-block;
 }
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
 
-/* --- About Me --- */
 .about-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px; /* Increased gap */
+    gap: 30px;
     align-items: flex-start;
 }
 .pixel-art-container {
     flex-basis: 200px;
-    flex-shrink: 0; /* Prevent shrinking on smaller screens before wrapping */
+    flex-shrink: 0;
     position: relative;
 }
 #pixel-photo {
     width: 100%;
     border: 3px solid var(--terminal-border-color);
-    image-rendering: pixelated; /* Keep it crispy */
+    image-rendering: pixelated;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    display: block; /* Remove extra space below image */
+    display: block;
 }
 #pixel-photo:hover {
     transform: scale(1.05) rotate(-2deg);
@@ -389,8 +369,8 @@ h2 {
 .bio {
     flex: 1;
     min-width: 300px;
-    font-family: var(--font-sans-serif); /* Cleaner font for bio */
-    color: var(--primary-text-color); /* Use CSS variable */
+    font-family: var(--font-sans-serif);
+    color: var(--primary-text-color);
     line-height: 1.7;
 }
 .bio p {
@@ -401,7 +381,7 @@ h2 {
     margin-top: 15px;
 }
 .contact-icons a {
-    display: inline-block; /* Allows transform and margin */
+    display: inline-block;
     margin-right: 12px;
     transition: transform var(--transition-fast);
 }
@@ -411,7 +391,7 @@ h2 {
     border: 1px solid transparent;
     border-radius: 4px;
     transition: border-color var(--transition-fast), filter var(--transition-fast);
-    vertical-align: middle; /* Better alignment */
+    vertical-align: middle;
 }
 .contact-icons a:hover img {
     border-color: var(--neon-blue);
@@ -421,11 +401,9 @@ h2 {
     transform: translateY(-3px);
 }
 
-
-/* --- Projects --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly larger minmax */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
 }
 .project-item {
@@ -437,11 +415,11 @@ h2 {
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
     position: relative;
     border-radius: 5px;
-    display: flex; /* For better internal alignment */
-    flex-direction: column; /* Stack image, title, tooltip */
-    justify-content: space-between; /* Push tooltip container to bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.project-item:hover, .project-item:focus-within { /* Added focus-within for keyboard nav */
+.project-item:hover, .project-item:focus-within {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 255, 255, 0.25);
     border-color: var(--neon-blue);
@@ -462,7 +440,7 @@ h2 {
 .project-item h3 {
     font-family: var(--font-pixel);
     color: var(--neon-blue);
-    margin-bottom: 10px; /* Increased margin */
+    margin-bottom: 10px;
     font-size: 1.3em;
 }
 .project-item p.tooltip {
@@ -471,16 +449,16 @@ h2 {
     background-color: #222;
     padding: 6px 10px;
     border-radius: 3px;
-    white-space: normal; /* Allow wrapping for longer tooltips */
+    white-space: normal;
     z-index: 10;
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transition-fast) 0.1s, visibility 0s linear 0.3s, transform var(--transition-fast) 0.1s;
-    width: calc(100% - 20px); /* Adjust width to fit inside padding */
+    width: calc(100% - 20px);
     position: absolute;
-    bottom: 10px; /* Positioned at the bottom */
+    bottom: 10px;
     left: 10px;
-    transform: translateY(10px); /* Initial state for animation */
+    transform: translateY(10px);
 }
 .project-item:hover p.tooltip,
 .project-item:focus-within p.tooltip {
@@ -490,8 +468,6 @@ h2 {
     transition-delay: 0.1s, 0s, 0.1s;
 }
 
-
-/* --- Skills (DOS Output Style) --- */
 .skills-container.dos-output {
     background-color: #000;
     border: 2px solid var(--neon-green);
@@ -507,13 +483,13 @@ h2 {
     margin-bottom: 12px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap; /* Allow wrapping for skill name if too long */
+    flex-wrap: wrap;
 }
 .skill-name {
     min-width: 120px;
     display: inline-block;
-    margin-right: 10px; /* Add some space between name and bar */
-    margin-bottom: 5px; /* Space if it wraps */
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 .progress-bar-old {
     flex-grow: 1;
@@ -523,34 +499,32 @@ h2 {
     padding: 2px;
     overflow: hidden;
     border-radius: 3px;
-    min-width: 150px; /* Ensure bar has some width */
+    min-width: 150px;
 }
 .progress-fill {
     background-color: var(--neon-green);
     height: 100%;
-    width: 0%; /* Initial state */
-    transition: width 1s ease-out 0.2s; /* Added delay for staggered effect */
+    width: 0%;
+    transition: width 1s ease-out 0.2s;
     text-align: right;
     padding-right: 8px;
     font-size: 0.85em;
-    line-height: 16px; /* Center text in bar */
+    line-height: 16px;
     color: #000;
     border-radius: 2px;
-    display: flex; /* For centering text */
-    align-items: center; /* For centering text */
-    justify-content: flex-end; /* For centering text */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-
-/* --- Resume --- */
 .resume-download { text-align: center; padding: 20px 0; }
 .resume-download p { margin-bottom: 15px; font-size: 1.1em; }
 
-.old-hyperlink, .download-button { /* Combined for consistency */
+.old-hyperlink, .download-button {
     display: inline-block;
     font-family: var(--font-retro-mono);
     color: var(--hyperlink-color);
-    text-decoration: none; /* Remove underline, border provides emphasis */
+    text-decoration: none;
     padding: 12px 20px;
     border: 2px dashed var(--hyperlink-border-color);
     margin-top: 15px;
@@ -565,8 +539,6 @@ h2 {
 }
 .file-size { font-size: 0.8em; color: #999; margin-left: 5px;}
 
-
-/* --- Contact Form (Guestbook Style) --- */
 .guestbook-style {
     background-color: rgba(50, 50, 70, 0.5);
     padding: 25px;
@@ -576,7 +548,7 @@ h2 {
 }
 #contact-form label {
     display: block;
-    margin-bottom: 8px; /* Increased margin */
+    margin-bottom: 8px;
     font-family: var(--font-retro-mono);
     color: var(--primary-text-color);
     font-size: 1.05em;
@@ -586,7 +558,7 @@ h2 {
 #contact-form textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px; /* Increased margin */
+    margin-bottom: 15px;
     background-color: #333;
     border: 1px solid #555;
     color: #fff;
@@ -607,9 +579,9 @@ h2 {
     background-color: var(--button-primary-bg);
     color: var(--button-primary-text);
     border: 2px outset var(--button-primary-border);
-    padding: 12px 25px; /* Increased padding */
+    padding: 12px 25px;
     font-family: var(--font-pixel);
-    font-size: 1.2em; /* Increased font size */
+    font-size: 1.2em;
     cursor: pointer;
     transition: background-color var(--transition-fast), transform var(--transition-fast), border-style var(--transition-fast), box-shadow var(--transition-fast);
     border-radius: 4px;
@@ -633,15 +605,14 @@ h2 {
     font-family: var(--font-retro-mono);
     color: var(--neon-green);
     font-weight: bold;
-    min-height: 1.5em; /* Reserve space to prevent layout shift */
+    min-height: 1.5em;
 }
 
-/* --- Footer --- */
-.main-footer-bottom { /* Renamed to avoid conflict with header class if any */
+.main-footer-bottom {
     text-align: center;
     padding: 25px 20px;
     background-color: #111;
-    color: #888; /* Slightly lighter grey */
+    color: #888;
     font-size: 0.9em;
     font-family: var(--font-retro-mono);
     border-top: 2px solid #333;
@@ -650,12 +621,12 @@ h2 {
 .marquee-container {
     background-color: #000;
     color: #ff0000;
-    padding: 8px 0; /* Increased padding */
+    padding: 8px 0;
     margin-bottom: 15px;
     font-family: var(--font-sans-serif);
     font-weight: bold;
     border-radius: 3px;
-    overflow: hidden; /* Ensure marquee text doesn't overflow visibly */
+    overflow: hidden;
 }
 #visitor-count {
     font-weight: bold;
@@ -666,57 +637,52 @@ h2 {
     margin-top: 10px;
 }
 
-
-/* --- Modal Styling --- */
 .modal {
-    /* display: none; Set by JS */
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Only if modal content itself is too tall */
-    background-color: rgba(0,0,0,0.75); /* Slightly darker overlay */
-    display: flex; /* For centering modal content */
-    align-items: center; /* For centering modal content */
-    justify-content: center; /* For centering modal content */
-    opacity: 0; /* Start hidden for fade-in */
-    visibility: hidden; /* Start hidden for fade-in */
+    overflow: auto;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
     transition: opacity var(--transition-normal), visibility 0s linear var(--transition-normal);
 }
 .modal.active {
     opacity: 1;
     visibility: visible;
-    transition-delay: 0s; /* Show immediately */
+    transition-delay: 0s;
 }
 
 .modal-content {
     position: relative;
-    padding: 0; /* Padding is handled by window-header/content */
+    padding: 0;
     width: 90%;
     max-width: 700px;
-    /* Uses .terminal-window styles */
-    border-radius: 5px; /* Match terminal window */
-    transform: scale(0.95); /* Start slightly smaller for pop effect */
+    border-radius: 5px;
+    transform: scale(0.95);
     transition: transform var(--transition-normal);
 }
 .modal.active .modal-content {
     transform: scale(1);
 }
 
-.modal .close-modal-btn { /* Specificity for modal close button */
-    background-color: #c00 !important; /* Ensure it overrides general .window-btn */
+.modal .close-modal-btn {
+    background-color: #c00 !important;
     color: #fff !important;
 }
 .modal .close-modal-btn:hover {
     background-color: #e00 !important;
 }
 
-
 #modal-project-body {
     font-family: var(--font-sans-serif);
-    color: var(--primary-text-color); /* Use CSS var */
+    color: var(--primary-text-color);
     line-height: 1.8;
 }
 #modal-project-body img {
@@ -738,12 +704,10 @@ h2 {
     margin-right: 10px;
 }
 
-
-/* --- Utility Classes --- */
 .hidden {
     display: none !important;
 }
-.visually-hidden { /* For accessibility, hide visually but not from screen readers */
+.visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -755,7 +719,6 @@ h2 {
     border: 0;
 }
 
-/* --- Print Styles --- */
 @media print {
     body {
         background-color: #fff;
@@ -780,23 +743,20 @@ h2 {
     .old-hyperlink::after { content: " (" attr(href) ")"; }
 }
 
-
-/* --- Responsive Design --- */
 @media (max-width: 768px) {
     body { font-size: 15px; }
     .main-header {
         padding: 10px 15px;
-        flex-direction: column; /* Stack logo/nav/controls */
+        flex-direction: column;
         align-items: flex-start;
     }
     .logo-container { margin-bottom: 10px; }
     .nav-links {
-        /* Basic mobile nav: consider a JS-driven hamburger menu for better UX */
         flex-direction: column;
         width: 100%;
         align-items: flex-start;
         margin-top: 10px;
-        background-color: var(--header-bg-color); /* Add background for stacked nav */
+        background-color: var(--header-bg-color);
     }
     .nav-links li { margin-right: 0; width: 100%; }
     .nav-link { display: block; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -813,7 +773,7 @@ h2 {
 
     .about-content { flex-direction: column; align-items: center; text-align: center; }
     .pixel-art-container { margin-bottom: 20px; max-width: 180px; }
-    .bio { text-align: left; } /* Keep bio text left-aligned */
+    .bio { text-align: left; }
 
     .projects-grid { grid-template-columns: 1fr; }
     .skill-item { flex-direction: column; align-items: flex-start;}
@@ -837,19 +797,17 @@ h2 {
     .main-footer-bottom { padding: 20px 10px; font-size: 0.85em; }
 }
 
-/* Selection styling */
 ::selection {
     background: var(--selection-bg);
     color: var(--selection-text);
     text-shadow: none;
 }
-::-moz-selection { /* Firefox */
+::-moz-selection {
     background: var(--selection-bg);
     color: var(--selection-text);
     text-shadow: none;
 }
 
-/* Body flash for Konami Code - more impactful */
 @keyframes konamiGlobalFlash {
     0%, 100% { background-color: var(--primary-bg-color); filter: brightness(1) contrast(1) saturate(1) invert(0) hue-rotate(0deg); }
     25% { background-color: #ff00ff; filter: brightness(1.5) contrast(1.2) saturate(3) invert(0.2) hue-rotate(45deg); }
@@ -857,10 +815,9 @@ h2 {
     75% { background-color: #ffff00; filter: brightness(1.7) contrast(1.3) saturate(4) invert(0.1) hue-rotate(135deg); }
 }
 body.konami-flash-active {
-    animation: konamiGlobalFlash 0.2s 5 linear; /* 5 quick flashes */
+    animation: konamiGlobalFlash 0.2s 5 linear;
 }
 
-/* Matrix effect container */
 .matrix-effect-container {
     position: fixed;
     top: 0;
@@ -868,32 +825,31 @@ body.konami-flash-active {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 10001; /* Above dial-up if active during load, but below modal */
+    z-index: 10001;
     pointer-events: none;
-    background-color: rgba(0,0,0,0.1); /* Slight dark tint during effect */
+    background-color: rgba(0,0,0,0.1);
 }
 .matrix-effect-container span.matrix-char {
     position: absolute;
     color: var(--neon-green);
     font-family: var(--font-retro-mono);
-    font-size: 16px; /* Fixed size for matrix effect */
+    font-size: 16px;
     text-shadow: 0 0 5px var(--neon-green);
-    user-select: none; /* Prevent text selection */
+    user-select: none;
     animation: matrixFadeAndFall linear forwards;
 }
 
 @keyframes matrixFadeAndFall {
     0% { opacity: 1; transform: translateY(0); }
     80% { opacity: 0.8; }
-    100% { opacity: 0; transform: translateY(100vh); } /* Fall off screen */
+    100% { opacity: 0; transform: translateY(100vh); }
 }
 
-/* God mode visitor counter styling */
 #visitor-count.god-mode-active {
-    color: #FFD700 !important; /* Gold color, important to override theme */
+    color: #FFD700 !important;
     font-weight: bold !important;
-    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFF, 0 0 15px #FF8C00 !important; /* Intense glow */
-    animation: godModePulseEffect 0.3s 5 alternate; /* Pulse 5 times */
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFF, 0 0 15px #FF8C00 !important;
+    animation: godModePulseEffect 0.3s 5 alternate;
     transition: color 0.1s ease-in-out, text-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
