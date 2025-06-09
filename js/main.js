@@ -1,8 +1,6 @@
-// Proto/js/main.js
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element Cache ---
     const dialUpOverlay = document.getElementById('dial-up-overlay');
     const dialUpProgressBar = dialUpOverlay ? dialUpOverlay.querySelector('.progress-bar-dialup') : null;
     const dialUpFill = dialUpOverlay ? dialUpOverlay.querySelector('.progress-bar-fill-dialup') : null;
@@ -30,12 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const CRT_THEME_PATH = 'css/crt-theme.css';
     const FLAT_THEME_PATH = 'css/flat-theme.css';
 
-    // --- Initial Setup ---
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- Dial-Up Simulation ---
     function simulateDialUp() {
         if (!dialUpOverlay || !dialUpFill || !dialUpStatus || !dialUpProgressBar) return;
 
@@ -58,11 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 dialUpStatus.textContent = statuses[statuses.length - 1];
                 dialUpProgressBar.setAttribute('aria-valuenow', progress);
                 setTimeout(() => {
-                    dialUpOverlay.classList.add('hidden'); // Use class for fade effect
-                    body.style.overflow = ''; // Restore scroll
+                    dialUpOverlay.classList.add('hidden');
+                    body.style.overflow = '';
                     typeWelcomeMessage();
                     initializeScrollAnimations();
-                    // Focus management: move focus to main content after overlay
                     document.getElementById('main-content')?.focus();
                 }, 1000);
             } else {
@@ -75,10 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }, 150);
-        body.style.overflow = 'hidden'; // Prevent scroll during dialup
+        body.style.overflow = 'hidden';
     }
 
-    // --- Welcome Message Typing Effect ---
     const welcomeMessageLines = [
         "Hello, World!", "> Initializing portfolio sequence...", "> Loading retro modules...",
         "> System.out.println(\"Welcome to my digital domain!\");", " ", "C:\\Users\\Guest> DIR",
@@ -91,14 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function typeWelcomeMessage() {
         if (!welcomeTextElement) return;
-        welcomeTextElement.innerHTML = ''; // Clear previous content
+        welcomeTextElement.innerHTML = '';
 
         function typeLine() {
             if (currentLineIndex < welcomeMessageLines.length) {
                 if (currentCharIndex < welcomeMessageLines[currentLineIndex].length) {
                     welcomeTextElement.innerHTML += welcomeMessageLines[currentLineIndex].charAt(currentCharIndex);
                     currentCharIndex++;
-                    setTimeout(typeLine, 20 + Math.random() * 20); // Slightly faster typing
+                    setTimeout(typeLine, 20 + Math.random() * 20);
                 } else {
                     welcomeTextElement.innerHTML += '\n';
                     currentLineIndex++;
@@ -106,11 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeLine, 80 + Math.random() * 80);
                 }
             } else {
-                 welcomeTextElement.parentElement.querySelector('.blinking-cursor')?.style.display !== 'none';
+                welcomeTextElement.parentElement.querySelector('.blinking-cursor')?.style.display !== 'none';
             }
         }
 
-        // Ensure dial-up is finished before typing
         if (dialUpOverlay && !dialUpOverlay.classList.contains('hidden')) {
             const checkDialUpDone = setInterval(() => {
                 if (dialUpOverlay.classList.contains('hidden')) {
@@ -123,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Navigation & Active Link Highlighting ---
     function setupNavigation() {
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -131,24 +123,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
                 if (targetSection) {
-                    // Using smooth scroll polyfill or native behavior
                     targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // For fixed header offset, manual calculation might be needed if scrollIntoView isn't enough
-                    // window.scrollTo({ top: targetSection.offsetTop - 70, behavior: 'smooth' });
                     updateActiveNavLink(this);
                 }
             });
         });
 
         window.addEventListener('scroll', handleScrollForNav);
-        handleScrollForNav(); // Initial check
+        handleScrollForNav();
     }
 
     function handleScrollForNav() {
         let currentSectionId = '';
         contentSections.forEach(section => {
             const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 100) { // Adjusted offset for fixed header
+            if (pageYOffset >= sectionTop - 100) {
                 currentSectionId = section.getAttribute('id');
             }
         });
@@ -166,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
         activeLink.classList.add('active');
     }
 
-    // --- Theme Toggler ---
     function setupThemeToggler() {
         if (!themeToggleBtn || !themeLink || !body) return;
 
@@ -177,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const savedTheme = localStorage.getItem('theme');
-        applyTheme(savedTheme || 'crt'); // Default to CRT if no theme saved
+        applyTheme(savedTheme || 'crt');
     }
 
     function applyTheme(themeName) {
@@ -192,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Project Modal Logic ---
     const projectDetailsData = {
         proj1: {
             title: "Project Showcase - Deep Dive",
@@ -211,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         projectItems.forEach(item => {
             item.addEventListener('click', () => openProjectModal(item.dataset.projectId));
-            item.addEventListener('keydown', (e) => { // Accessibility: open with Enter/Space
+            item.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     openProjectModal(item.dataset.projectId);
@@ -220,24 +207,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         closeModalBtn.addEventListener('click', closeProjectModal);
-        projectModal.addEventListener('click', (event) => { // Close on backdrop click
+        projectModal.addEventListener('click', (event) => {
             if (event.target === projectModal) {
                 closeProjectModal();
             }
         });
-        document.addEventListener('keydown', (e) => { // Close with Escape key
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && projectModal.classList.contains('active')) {
                 closeProjectModal();
             }
         });
     }
 
-    let lastFocusedElement = null; // For accessibility: store last focused element
+    let lastFocusedElement = null;
 
     function openProjectModal(projectId) {
         const details = projectDetailsData[projectId];
         if (details && projectModal && modalTitle && modalBody) {
-            lastFocusedElement = document.activeElement; // Store current focus
+            lastFocusedElement = document.activeElement;
 
             modalTitle.textContent = `${details.title.toUpperCase()}.TXT`;
             let bodyContent = '';
@@ -247,30 +234,28 @@ document.addEventListener('DOMContentLoaded', () => {
             bodyContent += details.description;
             modalBody.innerHTML = bodyContent;
 
-            projectModal.style.display = 'flex'; // Use flex for centering
-            setTimeout(() => projectModal.classList.add('active'), 10); // Trigger transition
-            body.style.overflow = 'hidden'; // Prevent background scroll
-            closeModalBtn?.focus(); // Focus on close button for accessibility
+            projectModal.style.display = 'flex';
+            setTimeout(() => projectModal.classList.add('active'), 10);
+            body.style.overflow = 'hidden';
+            closeModalBtn?.focus();
         }
     }
 
     function closeProjectModal() {
         if (projectModal) {
             projectModal.classList.remove('active');
-            body.style.overflow = ''; // Restore background scroll
+            body.style.overflow = '';
             setTimeout(() => {
                 projectModal.style.display = 'none';
                 if (lastFocusedElement) {
-                    lastFocusedElement.focus(); // Restore focus
+                    lastFocusedElement.focus();
                 }
-            }, 300); // Match CSS animation duration
+            }, 300);
         }
     }
 
-    // --- Skills Progress Bar Animation ---
     function initializeScrollAnimations() {
         animateSkillsOnScroll();
-        // Add other scroll-based animations here if any
     }
 
     function animateSkillsOnScroll() {
@@ -292,34 +277,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.unobserve(skillFill);
                 }
             });
-        }, { threshold: 0.3, rootMargin: "0px 0px -50px 0px" }); // Trigger a bit earlier
+        }, { threshold: 0.3, rootMargin: "0px 0px -50px 0px" });
 
         skillFills.forEach(item => {
             observer.observe(item);
         });
     }
 
-    // --- Contact Form ---
     function setupContactForm() {
         if (!contactForm || !formStatus) return;
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             formStatus.textContent = 'Sending message...';
-            formStatus.className = ''; // Reset classes
-            formStatus.style.color = body.classList.contains('flat-theme') ? '#007bff' : '#ffff00'; // Theme-aware color
+            formStatus.className = '';
+            formStatus.style.color = body.classList.contains('flat-theme') ? '#007bff' : '#ffff00';
 
-            // Simulate form submission
             setTimeout(() => {
                 const name = contactForm.elements.name.value.trim();
                 const email = contactForm.elements.email.value.trim();
                 const message = contactForm.elements.message.value.trim();
 
                 if (name && email && message) {
-                    // Basic email validation (consider a more robust library for production)
                     if (!/^\S+@\S+\.\S+$/.test(email)) {
                         formStatus.textContent = 'ERROR: Please enter a valid email address.';
-                        formStatus.classList.add('error'); // For flat theme specific error color
+                        formStatus.classList.add('error');
                         formStatus.style.color = '#ff0000';
                         return;
                     }
@@ -335,12 +317,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Visitor Counter ---
     function updateVisitorCounter() {
         if (!visitorCountElement) return;
-        let currentCount = localStorage.getItem('visitorCountPortfolio'); // Use a more specific key
+        let currentCount = localStorage.getItem('visitorCountPortfolio');
         if (currentCount === null) {
-            currentCount = Math.floor(Math.random() * 500) + 123; // Start from a base
+            currentCount = Math.floor(Math.random() * 500) + 123;
         } else {
             currentCount = parseInt(currentCount) + 1;
         }
@@ -348,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
         visitorCountElement.textContent = currentCount.toString().padStart(6, '0');
     }
 
-    // --- Music Toggle ---
     let isMusicPlaying = false;
     function setupMusicToggle() {
         if (!musicToggleBtn || !chiptuneMusic) return;
@@ -364,17 +344,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     musicToggleBtn.setAttribute('aria-pressed', 'true');
                 }).catch(error => {
                     console.warn("Chiptune playback failed. User interaction might be required first.", error);
-                    isMusicPlaying = !isMusicPlaying; // Toggle back if play failed
+                    isMusicPlaying = !isMusicPlaying;
                 });
             }
             isMusicPlaying = !isMusicPlaying;
         });
-        chiptuneMusic.addEventListener('ended', () => { // Handle looping if `loop` attribute isn't enough
+        chiptuneMusic.addEventListener('ended', () => {
             if(isMusicPlaying) chiptuneMusic.play().catch(e => console.warn("Loop playback failed", e));
         });
     }
 
-    // --- Konami Code Easter Egg ---
     const konamiCodeSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     let konamiCodeIndex = 0;
 
@@ -386,11 +365,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (konamiCodeIndex === konamiCodeSequence.length) {
                     konamiStatus.style.display = 'block';
                     activateKonamiBonusVisuals();
-                    konamiCodeIndex = 0; // Reset
+                    konamiCodeIndex = 0;
                     setTimeout(() => konamiStatus.style.display = 'none', 3000);
                 }
             } else {
-                konamiCodeIndex = 0; // Reset on wrong key
+                konamiCodeIndex = 0;
             }
         });
     }
@@ -398,15 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function activateKonamiBonusVisuals() {
         console.log("Konami Code Activated! Prepare for awesomeness!");
         body.classList.add('konami-flash-active');
-        setTimeout(() => body.classList.remove('konami-flash-active'), 1000); // Duration of 5 flashes * 0.2s
+        setTimeout(() => body.classList.remove('konami-flash-active'), 1000);
     }
 
-    // --- Initialize ---
     if (dialUpOverlay && !dialUpOverlay.classList.contains('hidden')) {
         simulateDialUp();
     } else {
-        // If dial-up is skipped or already done
-        dialUpOverlay?.classList.add('hidden'); // Ensure it's hidden
+        dialUpOverlay?.classList.add('hidden');
         typeWelcomeMessage();
         initializeScrollAnimations();
     }
