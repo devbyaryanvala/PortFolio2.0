@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     dialUpStatus.textContent = statuses[statusIndex];
                 }
             }
-        }, 1);
+        }, 150);
         body.style.overflow = 'hidden';
     }
 
