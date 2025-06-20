@@ -1,4 +1,5 @@
-<HTML lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="css/crt-theme.css" id="theme-link">
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
-<body class="crt-theme">
+<body>
     <div class="overlay-scanlines"></div>
     <div class="overlay-vignette"></div>
 
@@ -24,7 +25,7 @@
 
     <header class="main-header">
         <div class="logo-container">
-             <a href="#welcome" class="nav-link-logo">[ARYAN_VALA]</a>
+               <a href="#welcome" class="nav-link-logo">[ARYAN_VALA]</a>
         </div>
         <nav aria-label="Main navigation">
             <ul class="nav-links">
@@ -152,7 +153,7 @@
                         <div class="progress-fill" style="width: 0%;" data-skill-level="80%">0%</div>
                     </div>
                 </div>
-                
+
                 <p aria-hidden="true">Skill scan complete. Ready. Will Add More</p>
             </div>
         </section>
@@ -195,14 +196,14 @@
                 ** Site optimized for Netscape Navigator 4.0 and Internet Explorer 5.0 -- Best viewed at 800x600 -- Under Construction! **
             </marquee>
         </div>
-        <p>You are visitor #<span id="visitor-count">000123</span></p>
-        <p class="retro-copyright">&copy; 1999-<span id="current-year">[2025]</span> [Aryan Vala]. All rights reserved (mostly).</p>
+        <p>You are visitor #<span id="visitor-count">000000</span></p>
+        <p class="retro-copyright">&copy; 1999-<span id="current-year"></span> [Aryan Vala]. All rights reserved (mostly).</p>
         <p id="konami-code-status" style="display:none; color: #0f0;" aria-live="assertive">Konami Code Activated! 🎮</p>
     </footer>
 
     <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" style="display: none;">
         <div class="modal-content terminal-window">
-             <div class="window-header">
+               <div class="window-header">
                 <span id="modal-project-title" class="window-title">PROJECT_DETAILS.TXT</span>
                 <div class="window-buttons">
                     <button type="button" class="window-btn close-modal-btn" aria-label="Close project details modal">X</button>
@@ -218,7 +219,12 @@
         Your browser does not support the audio element.
     </audio>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    
+    <script src="./js/app.js"></script>
+    <script src="js/visitorCount.js"></script> 
     <script src="js/main.js"></script>
     <script src="js/easter-eggs.js"></script>
-    </body>
-</HTML>
+</body>
+</html>

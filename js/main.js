@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillFills = document.querySelectorAll('.skill-item .progress-fill');
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
-    const visitorCountElement = document.getElementById('visitor-count');
     const musicToggleBtn = document.getElementById('music-toggle-btn');
     const chiptuneMusic = document.getElementById('chiptune-music');
     const konamiStatus = document.getElementById('konami-code-status');
@@ -69,15 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     dialUpStatus.textContent = statuses[statusIndex];
                 }
             }
-        }, 150);
+        }, 1);
         body.style.overflow = 'hidden';
     }
 
     const welcomeMessageLines = [
         "Hello, World!", "> Initializing portfolio sequence...", "> Loading retro modules...",
         "> System.out.println(\"Welcome to my digital domain!\");", " ", "C:\\Users\\Guest> DIR",
-        "  ABOUT.ME        <DIR>", "  PROJECTS.EXE    <DIR>", "  SKILLS.DAT      <DIR>",
-        "  RESUME.PDF      <FILE>", "  CONTACT.HTML    <FORM>", " ",
+        "  ABOUT.ME        <DIR>", "  PROJECTS.EXE    <DIR>", "  SKILLS.DAT      <DIR>",
+        "  RESUME.PDF      <FILE>", "  CONTACT.HTML    <FORM>", " ",
         "> Ready. Navigate using the links above or scroll down."
     ];
     let currentLineIndex = 0;
@@ -317,18 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateVisitorCounter() {
-        if (!visitorCountElement) return;
-        let currentCount = localStorage.getItem('visitorCountPortfolio');
-        if (currentCount === null) {
-            currentCount = Math.floor(Math.random() * 500) + 123;
-        } else {
-            currentCount = parseInt(currentCount) + 1;
-        }
-        localStorage.setItem('visitorCountPortfolio', currentCount);
-        visitorCountElement.textContent = currentCount.toString().padStart(6, '0');
-    }
-
     let isMusicPlaying = false;
     function setupMusicToggle() {
         if (!musicToggleBtn || !chiptuneMusic) return;
@@ -349,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             isMusicPlaying = !isMusicPlaying;
         });
+
         chiptuneMusic.addEventListener('ended', () => {
             if(isMusicPlaying) chiptuneMusic.play().catch(e => console.warn("Loop playback failed", e));
         });
@@ -387,12 +375,11 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWelcomeMessage();
         initializeScrollAnimations();
     }
+
     setupNavigation();
     setupThemeToggler();
     setupProjectModal();
     setupContactForm();
-    updateVisitorCounter();
     setupMusicToggle();
     setupKonamiCodeListener();
-
 });
