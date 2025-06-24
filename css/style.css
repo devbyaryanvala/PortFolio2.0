@@ -825,24 +825,23 @@ body.konami-flash-active {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 10001;
+    z-index: 10001; /* High z-index to be on top */
     pointer-events: none;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.1); /* Subtle background */
 }
 .matrix-effect-container span.matrix-char {
     position: absolute;
-    color: var(--neon-green);
-    font-family: var(--font-retro-mono);
-    font-size: 16px;
-    text-shadow: 0 0 5px var(--neon-green);
+    color: limegreen; /* Use a very bright, direct color for debugging */
+    font-family: 'RetroMono', monospace; /* Ensure a fallback font */
+    font-size: 20px; /* Make them larger for visibility */
+    text-shadow: 0 0 10px limegreen; /* Brighter shadow */
     user-select: none;
     animation: matrixFadeAndFall linear forwards;
 }
 
 @keyframes matrixFadeAndFall {
     0% { opacity: 1; transform: translateY(0); }
-    80% { opacity: 0.8; }
-    100% { opacity: 0; transform: translateY(100vh); }
+    100% { opacity: 1; transform: translateY(0); } /* Characters stay opaque and don't move vertically */
 }
 
 #visitor-count.god-mode-active {
@@ -857,4 +856,121 @@ body.konami-flash-active {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.15); opacity: 0.7; }
     100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- New Easter Egg Styles --- */
+
+/* Retro Game Mode */
+body.retro-game-mode {
+    filter: saturate(2) contrast(1.8) brightness(1.2) hue-rotate(-10deg); /* More vibrant, slightly shifted hue */
+    image-rendering: pixelated;
+    transition: filter 0.8s ease-in-out; /* Slower transition for overall filter */
+}
+
+.retro-game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.3); /* Slightly darker overlay */
+    backdrop-filter: blur(0.8px) contrast(1.3) saturate(1.2); /* Slightly more pronounced backdrop filter */
+    /* Add subtle scanlines */
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 1px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.2) 3px
+    );
+    background-size: 100% 4px; /* Control density of scanlines */
+    animation: scanlinesRoll 30s linear infinite; /* Slow roll for scanlines */
+}
+
+@keyframes scanlinesRoll {
+    from { background-position-y: 0; }
+    to { background-position-y: 120px; } /* Adjust to match background-size height */
+}
+
+.retro-game-char {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0; /* Yellow square */
+    box-shadow: 0 0 8px #ff0, 0 0 15px rgba(255, 255, 0, 0.6); /* Enhanced glow */
+    animation: moveRetroChar 6s ease-in-out infinite alternate, pixelateChar 0.2s infinite alternate; /* Slower, smoother movement */
+    image-rendering: pixelated;
+}
+
+@keyframes moveRetroChar {
+    0% { top: 10%; left: 10%; transform: scale(1); }
+    25% { top: 80%; left: 20%; transform: scale(1.1) rotate(90deg); }
+    50% { top: 15%; left: 70%; transform: scale(1) rotate(180deg); }
+    75% { top: 60%; left: 85%; transform: scale(1.1) rotate(270deg); }
+    100% { top: 10%; left: 10%; transform: scale(1) rotate(360deg); }
+}
+
+@keyframes pixelateChar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); } /* Subtle scaling for pixel effect */
+}
+
+/* Broken Screen Glitch */
+body.glitch-active {
+    animation: fullScreenGlitch 0.05s infinite alternate;
+    overflow: hidden; /* Prevent scrollbars during glitch */
+}
+
+@keyframes fullScreenGlitch {
+    0% {
+        transform: translate(0, 0);
+        filter: hue-rotate(0deg) saturate(1) brightness(1);
+        clip-path: inset(0 0 0 0);
+    }
+    25% {
+        transform: translate(5px, -3px);
+        filter: hue-rotate(90deg) saturate(1.5) brightness(1.2);
+        clip-path: inset(10px 0 5px 0);
+    }
+    50% {
+        transform: translate(-4px, 2px);
+        filter: hue-rotate(180deg) saturate(0.8) brightness(0.8);
+        clip-path: inset(0 15px 0 0);
+    }
+    75% {
+        transform: translate(3px, -1px);
+        filter: hue-rotate(270deg) saturate(1.3) brightness(1.1);
+        clip-path: inset(5px 0 10px 0);
+    }
+    100% {
+        transform: translate(0, 0);
+        filter: hue-rotate(360deg) saturate(1) brightness(1);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Monochrome Mode */
+body.monochrome-mode {
+    filter: grayscale(100%) contrast(1.1);
+    transition: filter 0.5s ease-in-out;
+}
+
+/* Ensure glitch works on CRT theme by also affecting overlays */
+body.crt-theme.glitch-active .overlay-scanlines,
+body.crt-theme.glitch-active .overlay-vignette {
+    opacity: 0.2 !important; /* Make them less opaque to reveal body glitch */
+    animation: overlayGlitchFlicker 0.08s infinite alternate !important; /* Make overlays flicker too */
+}
+
+@keyframes overlayGlitchFlicker {
+    0% { transform: translate(0, 0); opacity: 0.2; }
+    50% { transform: translate(2px, -2px); opacity: 0.1; }
+    100% { transform: translate(-2px, 2px); opacity: 0.2; }
+}
+
+/* Also, ensure the body's own glitch animation is dominant when CRT theme is active */
+body.crt-theme.glitch-active {
+    animation: fullScreenGlitch 0.05s infinite alternate !important;
 }

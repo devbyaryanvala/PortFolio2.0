@@ -1,138 +1,212 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const matrixSequence = "matrix";
-    let currentMatrixInput = "";
+    const matrixSequence = "matrix";
+    let currentMatrixInput = "";
 
-    const godModeSequence = "iddqd";
-    let currentGodModeInput = "";
-    const visitorCountElement = document.getElementById('visitor-count');
+    const godModeSequence = "iddqd";
+    let currentGodModeInput = "";
+    const visitorCountElement = document.getElementById('visitor-count');
 
-    document.addEventListener('keypress', (e) => {
-        const typedChar = String.fromCharCode(e.keyCode).toLowerCase();
+    // New Easter Egg Sequences
+    const retroGameSequence = "retrogame";
+    let currentRetroGameInput = "";
 
-        currentMatrixInput += typedChar;
-        if (currentMatrixInput.endsWith(matrixSequence)) {
-            triggerMatrixEffect();
-            currentMatrixInput = "";
-        }
-        if (currentMatrixInput.length > 100) {
-            currentMatrixInput = currentMatrixInput.substring(currentMatrixInput.length - matrixSequence.length - 5);
-        }
+    const systemFailSequence = "systemfail";
+    let currentSystemFailInput = "";
 
-        if (visitorCountElement) {
-            currentGodModeInput += typedChar;
-            if (currentGodModeInput.endsWith(godModeSequence)) {
-                triggerGodModeEffect();
-                currentGodModeInput = "";
-            }
-            if (currentGodModeInput.length > 100) {
-                currentGodModeInput = currentGodModeInput.substring(currentGodModeInput.length - godModeSequence.length - 5);
-            }
-        }
-    });
+    const monochromeSequence = "monochrome";
+    let currentMonochromeInput = "";
 
-    function triggerMatrixEffect() {
-        console.log("Matrix Easter Egg Activated!");
+    // Get the pre-existing matrix container
+    const matrixEffectContainer = document.querySelector('.matrix-effect-container');
 
-        const effectContainer = document.createElement('div');
-        effectContainer.style.position = 'fixed';
-        effectContainer.style.top = '0';
-        effectContainer.style.left = '0';
-        effectContainer.style.width = '100%';
-        effectContainer.style.height = '100%';
-        effectContainer.style.overflow = 'hidden';
-        effectContainer.style.zIndex = '10001';
-        effectContainer.style.pointerEvents = 'none';
-        document.body.appendChild(effectContainer);
+    // Diagnostic console log for keypress listener
+    console.log("Easter Eggs: Keypress listener active.");
 
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍｦｲｸｺｿﾁﾄﾉﾌﾔﾖﾙﾚﾛﾝ";
-        const charArray = chars.split("");
-        const numColumns = Math.floor(window.innerWidth / 15);
+    document.addEventListener('keypress', (e) => {
+        const typedChar = String.fromCharCode(e.keyCode).toLowerCase();
+        // console.log("Typed:", typedChar, "Current Matrix Input:", currentMatrixInput); // Uncomment for very verbose debugging
 
-        for (let i = 0; i < numColumns; i++) {
-            setTimeout(() => {
-                createColumn(effectContainer, charArray, i * 15);
-            }, Math.random() * 1000);
-        }
+        // Matrix Effect
+        currentMatrixInput += typedChar;
+        if (currentMatrixInput.endsWith(matrixSequence)) {
+            console.log("Easter Eggs: Matrix sequence detected!");
+            triggerMatrixEffect();
+            currentMatrixInput = "";
+        }
+        if (currentMatrixInput.length > 100) { // Keep input buffer from growing too large
+            currentMatrixInput = currentMatrixInput.substring(currentMatrixInput.length - matrixSequence.length - 5);
+        }
 
-        setTimeout(() => {
-            if (document.body.contains(effectContainer)) {
-                 document.body.removeChild(effectContainer);
-            }
-        }, 5000);
-    }
+        // God Mode Effect
+        if (visitorCountElement) {
+            currentGodModeInput += typedChar;
+            if (currentGodModeInput.endsWith(godModeSequence)) {
+                console.log("Easter Eggs: God Mode sequence detected!");
+                triggerGodModeEffect();
+                currentGodModeInput = "";
+            }
+            if (currentGodModeInput.length > 100) { // Keep input buffer from growing too large
+                currentGodModeInput = currentGodModeInput.substring(currentGodModeInput.length - godModeSequence.length - 5);
+            }
+        }
 
-    function createColumn(container, chars, xPosition) {
-        let yPosition = Math.random() * -window.innerHeight;
-        const columnSpeed = 5 + Math.random() * 10;
+        // Retro Game Effect
+        currentRetroGameInput += typedChar;
+        if (currentRetroGameInput.endsWith(retroGameSequence)) {
+            console.log("Easter Eggs: Retro Game sequence detected!");
+            triggerRetroGameEffect();
+            currentRetroGameInput = "";
+        }
+        if (currentRetroGameInput.length > 100) {
+            currentRetroGameInput = currentRetroGameInput.substring(currentRetroGameInput.length - retroGameSequence.length - 5);
+        }
 
-        function dropChar() {
-            if (yPosition > window.innerHeight) {
-                return;
-            }
+        // System Fail Glitch Effect
+        currentSystemFailInput += typedChar;
+        if (currentSystemFailInput.endsWith(systemFailSequence)) {
+            console.log("Easter Eggs: System Fail sequence detected!");
+            triggerBrokenScreenGlitch();
+            currentSystemFailInput = "";
+        }
+        if (currentSystemFailInput.length > 100) {
+            currentSystemFailInput = currentSystemFailInput.substring(currentSystemFailInput.length - systemFailSequence.length - 5);
+        }
 
-            const charElement = document.createElement('span');
-            charElement.textContent = chars[Math.floor(Math.random() * chars.length)];
-            charElement.style.position = 'absolute';
-            charElement.style.left = xPosition + 'px';
-            charElement.style.top = yPosition + 'px';
-            charElement.style.color = '#39ff14';
-            charElement.style.fontSize = '16px';
-            charElement.style.fontFamily = "'RetroMono', monospace";
-            charElement.style.textShadow = '0 0 5px #39ff14';
-            charElement.style.opacity = '1';
-            container.appendChild(charElement);
+        // Monochrome Toggle
+        currentMonochromeInput += typedChar;
+        if (currentMonochromeInput.endsWith(monochromeSequence)) {
+            console.log("Easter Eggs: Monochrome sequence detected!");
+            toggleMonochromeMode();
+            currentMonochromeInput = "";
+        }
+        if (currentMonochromeInput.length > 100) {
+            currentMonochromeInput = currentMonochromeInput.substring(currentMonochromeInput.length - monochromeSequence.length - 5);
+        }
+    });
 
-            yPosition += columnSpeed;
+    function triggerMatrixEffect() {
+        console.log("Matrix Easter Egg Activated! - Showing container and generating chars.");
 
-            setTimeout(() => {
-                charElement.style.transition = 'opacity 0.8s';
-                charElement.style.opacity = '0';
-                setTimeout(() => {
-                    if (container.contains(charElement)) {
-                         container.removeChild(charElement);
-                    }
-                }, 800);
-            }, 200 + Math.random() * 500);
+        if (!matrixEffectContainer) {
+            console.error("Matrix effect container not found in HTML.");
+            return;
+        }
 
-            requestAnimationFrame(dropChar);
-        }
-        dropChar();
-    }
+        // Clear any existing chars from previous runs
+        matrixEffectContainer.innerHTML = ''; 
+        matrixEffectContainer.style.display = 'block'; // Show the container
 
-    function triggerGodModeEffect() {
-        if (!visitorCountElement) return;
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍｦｲｸｺｿﾁﾄﾉﾌﾔﾖﾙﾚﾛﾝ";
+        const charArray = chars.split("");
+        const numColumns = Math.floor(window.innerWidth / 15);
 
-        console.log("God Mode Easter Egg Activated on Visitor Counter!");
-        const originalColor = visitorCountElement.style.color || 'yellow';
-        const originalTextShadow = visitorCountElement.style.textShadow;
+        for (let i = 0; i < numColumns; i++) {
+            setTimeout(() => {
+                createColumn(matrixEffectContainer, charArray, i * 15);
+            }, Math.random() * 1000);
+        }
 
-        visitorCountElement.style.color = '#FFD700';
-        visitorCountElement.style.fontWeight = 'bold';
-        visitorCountElement.style.transition = 'all 0.1s ease-in-out';
-        visitorCountElement.style.textShadow = '0 0 5px #FFD700, 0 0 10px #FFF, 0 0 15px #FF8C00';
-        visitorCountElement.classList.add('god-mode-flash');
+        setTimeout(() => {
+            matrixEffectContainer.style.display = 'none'; // Hide the container
+            console.log("Matrix Easter Egg Activated! - Matrix effect ended.");
+        }, 5000); // Effect lasts for 5 seconds
+    }
 
-        const styleSheet = document.getElementById('easter-egg-styles') || document.createElement('style');
-        styleSheet.id = 'easter-egg-styles';
-        styleSheet.innerHTML = `
-            .god-mode-flash {
-                animation: godModePulse 0.3s 5 alternate;
-            }
-            @keyframes godModePulse {
-                0% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.15); opacity: 0.7; }
-                100% { transform: scale(1); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(styleSheet);
+function createColumn(container, chars, xPosition) {
+        // Original: let yPosition = Math.random() * -window.innerHeight;
+        let yPosition = 0; // Diagnostic: start at the very top of the container
+        const columnSpeed = 10 + Math.random() * 10; // Diagnostic: faster descent
 
-        setTimeout(() => {
-            visitorCountElement.style.color = originalColor;
-            visitorCountElement.style.fontWeight = 'normal';
-            visitorCountElement.style.textShadow = originalTextShadow || 'none';
-            visitorCountElement.classList.remove('god-mode-flash');
-            console.log("God Mode on Visitor Counter Deactivated.");
-        }, 2000);
-    }
+        function dropChar() {
+            if (yPosition > window.innerHeight) {
+                return;
+            }
+
+            const charElement = document.createElement('span');
+            charElement.textContent = chars[Math.floor(Math.random() * chars.length)];
+            charElement.classList.add('matrix-char');
+            charElement.style.left = xPosition + 'px';
+            charElement.style.top = yPosition + 'px';
+            container.appendChild(charElement);
+
+            yPosition += columnSpeed;
+
+            // With matrixFadeAndFall set to be static, these timeouts for opacity fade are less relevant for initial display.
+            setTimeout(() => {
+                charElement.style.transition = 'none'; // No transition during debugging
+                charElement.style.opacity = '1'; // Ensure full opacity
+                // The charElement removal logic below is still important for cleanup.
+                setTimeout(() => {
+                    if (container.contains(charElement)) {
+                        container.removeChild(charElement);
+                    }
+                }, 800); // This still controls how long individual chars stay. You can increase this.
+            }, 200 + Math.random() * 500);
+
+            requestAnimationFrame(dropChar);
+        }
+        dropChar();
+    }
+
+    function triggerGodModeEffect() {
+        if (!visitorCountElement) return;
+
+        console.log("God Mode Easter Egg Activated on Visitor Counter!");
+        visitorCountElement.classList.add('god-mode-active');
+
+        setTimeout(() => {
+            visitorCountElement.classList.remove('god-mode-active');
+            console.log("God Mode on Visitor Counter Deactivated.");
+        }, 2000);
+    }
+
+    // NEW EASTER EGGS START HERE
+
+    function triggerRetroGameEffect() {
+        console.log("Retro Game Easter Egg Activated!");
+        const body = document.body;
+        body.classList.add('retro-game-mode');
+
+        const overlay = document.createElement('div');
+        overlay.classList.add('retro-game-overlay');
+        document.body.appendChild(overlay);
+
+        // Simple bouncing square character
+        const char = document.createElement('div');
+        char.classList.add('retro-game-char');
+        overlay.appendChild(char);
+
+        setTimeout(() => {
+            body.classList.remove('retro-game-mode');
+            if (document.body.contains(overlay)) {
+                document.body.removeChild(overlay);
+            }
+            console.log("Retro Game Easter Egg Deactivated.");
+        }, 5000); // Effect lasts for 5 seconds
+    }
+
+    function triggerBrokenScreenGlitch() {
+        console.log("System Fail Glitch Easter Egg Activated!");
+        const body = document.body;
+        body.classList.add('glitch-active');
+
+        // Play a glitch sound if an audio element exists. You would need to provide `assets/audio/glitch.mp3`.
+        const glitchSound = document.getElementById('glitch-audio');
+        if (glitchSound) {
+            glitchSound.play().catch(e => console.warn("Glitch audio playback failed:", e));
+        }
+
+        setTimeout(() => {
+            body.classList.remove('glitch-active');
+            console.log("System Fail Glitch Easter Egg Deactivated.");
+        }, 5000); // Effect lasts for 5 seconds
+    }
+
+    function toggleMonochromeMode() {
+        console.log("Monochrome Mode Toggled!");
+        const body = document.body;
+        body.classList.toggle('monochrome-mode');
+    }
+
 });

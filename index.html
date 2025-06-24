@@ -10,6 +10,8 @@
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <div class="matrix-effect-container" style="display:none;"></div> 
+
     <div class="overlay-scanlines"></div>
     <div class="overlay-vignette"></div>
 
@@ -45,6 +47,10 @@
             <button type="button" id="music-toggle-btn" title="Toggle Music" aria-label="Toggle background music">
                 <img src="assets/images/music-icon.png" alt="Music icon" class="theme-icon">
                 Music
+            </button>
+            <button type="button"  title="Toggle easter" aria-label="Toggle easter egg">
+                <img src="assets/images/easter-icon.png" alt="esater icon" class="theme-icon">
+                Easter
             </button>
         </div>
     </header>
@@ -174,7 +180,7 @@
                 <div class="form-group">
                     <label for="name">NAME:</label>
                     <input type="text" id="name" name="name" required autocomplete="name">
-                </div>
+            </div>
                 <div class="form-group">
                     <label for="email">EMAIL:</label>
                     <input type="email" id="email" name="email" required autocomplete="email">
@@ -216,6 +222,10 @@
 
     <audio id="chiptune-music" loop preload="none">
         <source src="assets/audio/chiptune.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="glitch-audio" preload="auto">
+        <source src="assets/audio/glitch.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
