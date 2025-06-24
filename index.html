@@ -48,8 +48,8 @@
                 <img src="assets/images/music-icon.png" alt="Music icon" class="theme-icon">
                 Music
             </button>
-            <button type="button"  title="Toggle easter" aria-label="Toggle easter egg">
-                <img src="assets/images/easter-icon.png" alt="esater icon" class="theme-icon">
+            <button type="button" id="easter-egg-toggle-btn" title="Go to Easter Eggs" aria-label="Go to Easter Egg section">
+                <img src="assets/images/easter-icon.png" alt="easter icon" class="theme-icon">
                 Easter
             </button>
         </div>
@@ -217,6 +217,47 @@
             </div>
             <div class="window-content" id="modal-project-body">
                 </div>
+        </div>
+    </div>
+
+    <div id="easter-egg-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-easter-egg-title" style="display: none;">
+        <div class="modal-content terminal-window">
+               <div class="window-header">
+                <span id="modal-easter-egg-title" class="window-title">EASTER_EGG_COMMANDS.TXT</span>
+                <div class="window-buttons">
+                    <button type="button" class="window-btn close-modal-btn" aria-label="Close easter egg details modal">X</button>
+                </div>
+            </div>
+            <div class="window-content" id="modal-easter-egg-body">
+                <p>Welcome, curious user! You've found the hidden list of commands.</p>
+                <p>Type these sequences anywhere on the page to activate their effects:</p>
+                
+                <h3><span class="neon-green">MATRIX EFFECT</span></h3>
+                <p><b>Sequence:</b> <span class="neon-blue">matrix</span></p>
+                <p><b>Effect:</b> Activates a classic "Matrix" digital rain visual effect across the screen for 5 seconds.</p>
+                <br>
+
+                <h3><span class="neon-green">GOD MODE</span></h3>
+                <p><b>Sequence:</b> <span class="neon-blue">iddqd</span></p>
+                <p><b>Effect:</b> Makes the visitor counter glow with a powerful "God Mode" effect for 2 seconds. (A nod to classic Doom cheats!)</p>
+                <br>
+
+                <h3><span class="neon-green">RETRO GAME MODE</span></h3>
+                <p><b>Sequence:</b> <span class="neon-blue">retrogame</span></p>
+                <p><b>Effect:</b> Applies a retro game filter to the entire page and introduces a bouncing yellow square character for 5 seconds, complete with subtle scanlines.</p>
+                <br>
+
+                <h3><span class="neon-green">SYSTEM FAIL GLITCH</span></h3>
+                <p><b>Sequence:</b> <span class="neon-blue">systemfail</span></p>
+                <p><b>Effect:</b> Triggers a full-screen glitch effect, simulating a broken display. Lasts for 5 seconds and may play a glitch sound if available.</p>
+                <br>
+
+                <h3><span class="neon-green">MONOCHROME TOGGLE</span></h3>
+                <p><b>Sequence:</b> <span class="neon-blue">monochrome</span></p>
+                <p><b>Effect:</b> Toggles a grayscale filter on and off, changing the entire site to a monochrome view.</p>
+                <br>
+                <p>Enjoy exploring these hidden features! Don't tell anyone about them...</p>
+            </div>
         </div>
     </div>
 

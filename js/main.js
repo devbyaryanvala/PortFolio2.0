@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const chiptuneMusic = document.getElementById('chiptune-music');
     const konamiStatus = document.getElementById('konami-code-status');
     const currentYearSpan = document.getElementById('current-year');
+    const easterEggToggleBtn = document.getElementById('easter-egg-toggle-btn'); // Easter Egg Button
+
+    // New Easter Egg Modal elements
+    const easterEggModal = document.getElementById('easter-egg-modal');
+    const modalEasterEggTitle = document.getElementById('modal-easter-egg-title');
+    const modalEasterEggBody = document.getElementById('modal-easter-egg-body');
+    const closeEasterEggModalBtn = easterEggModal ? easterEggModal.querySelector('.close-modal-btn') : null;
+
 
     const CRT_THEME_PATH = 'css/crt-theme.css';
     const FLAT_THEME_PATH = 'css/flat-theme.css';
@@ -253,6 +261,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // New: Functions to open and close Easter Egg Modal
+    function openEasterEggModal() {
+        if (easterEggModal && modalEasterEggTitle && modalEasterEggBody) {
+            lastFocusedElement = document.activeElement; // Save focus
+
+            // Content is already static within the HTML, no dynamic population needed here.
+            easterEggModal.style.display = 'flex';
+            setTimeout(() => easterEggModal.classList.add('active'), 10);
+            body.style.overflow = 'hidden'; // Prevent scrolling body
+            closeEasterEggModalBtn?.focus(); // Focus close button for accessibility
+        }
+    }
+
+    function closeEasterEggModal() {
+        if (easterEggModal) {
+            easterEggModal.classList.remove('active');
+            body.style.overflow = ''; // Restore body scrolling
+            setTimeout(() => {
+                easterEggModal.style.display = 'none';
+                if (lastFocusedElement) {
+                    lastFocusedElement.focus(); // Restore focus to the last element
+                }
+            }, 300); // Match CSS transition duration
+        }
+    }
+
     function initializeScrollAnimations() {
         animateSkillsOnScroll();
     }
@@ -367,6 +401,31 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('konami-flash-active');
         setTimeout(() => body.classList.remove('konami-flash-active'), 1000);
     }
+
+    // New: Setup Easter Egg button click listener
+    if (easterEggToggleBtn) {
+        easterEggToggleBtn.addEventListener('click', () => {
+            openEasterEggModal(); // Open the new modal
+        });
+    }
+
+    // New: Close Easter Egg Modal using its close button or overlay click
+    if (closeEasterEggModalBtn) {
+        closeEasterEggModalBtn.addEventListener('click', closeEasterEggModal);
+    }
+    if (easterEggModal) {
+        easterEggModal.addEventListener('click', (event) => {
+            if (event.target === easterEggModal) {
+                closeEasterEggModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && easterEggModal.classList.contains('active')) {
+                closeEasterEggModal();
+            }
+        });
+    }
+
 
     if (dialUpOverlay && !dialUpOverlay.classList.contains('hidden')) {
         simulateDialUp();
