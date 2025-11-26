@@ -190,12 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectDetailsData = {
         proj1: {
             title: "Project Showcase - Deep Dive",
-            description: "<p>This is <strong>Project Showcase</strong>. It was developed using cutting-edge technology from 1998, including <em>HTML</em> and an Access NON-EXISTING Database.</p><p>Key Features:</p><ul><li>Animations</li><li>Simple UI</li><li>Optimized for 800x600 resolution(NOT REALLY)</li></ul><p><a href='https://project.aryanvala.site' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>View Live (Somwhere in the internet)</a> or <a href='https://github.com/devbyaryanvala/Project_Showcase' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>GitHub Repo</a></p>",
+            description: "<p>This is <strong>Project Showcase</strong>. It was developed using cutting-edge technology from 1998, including <em>HTML</em> and an Access NON-EXISTING Database.</p><p>Key Features:</p><ul><li>Animations</li><li>Simple UI</li><li>Optimized for 800x600 resolution(NOT REALLY)</li></ul><p><a href='https://project.aryanvala.online' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>View Live (Somwhere in the internet)</a> or <a href='https://github.com/devbyaryanvala/Project_Showcase' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>GitHub Repo</a></p>",
             image: "assets/images/project1-large.png"
         },
         proj2: {
             title: "Old Portfolio - Deep Dive",
-            description: "<p>The <strong>OLD Portfolio website</strong> is an ambitious project to bring back the glory days When i first started Coding. Built with HTML and CSS/ThreeJS.</p><p>Currently supports:</p><ul><li>Mobile (partial)</li><li>Desktop PCs With 720p res or higher (Working)</li></ul><p>Challenges included Learning ThreeJS from scratch.</p><p><a href='https://oldportfolio.aryanvala.site' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>Live View (Somwhere in the internet)</a> or <a href='https://github.com/devbyaryanvala/testhome' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>GitHub Repo</a></p>",
+            description: "<p>The <strong>OLD Portfolio website</strong> is an ambitious project to bring back the glory days When i first started Coding. Built with HTML and CSS/ThreeJS.</p><p>Currently supports:</p><ul><li>Mobile (partial)</li><li>Desktop PCs With 720p res or higher (Working)</li></ul><p>Challenges included Learning ThreeJS from scratch.</p><p><a href='https://oldportfolio.aryanvala.online' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>Live View (Somwhere in the internet)</a> or <a href='https://github.com/devbyaryanvala/testhome' class='old-hyperlink' target='_blank' rel='noopener noreferrer'>GitHub Repo</a></p>",
             image: "assets/images/project2-large.png"
         }
     };
